@@ -10,6 +10,7 @@
 - Axios - para fazer integração
 - Prettier - para o lint do código
 - EsLint - para o lint do código
+- babel
 
 ### Ferramentas usada para ajudar durante a organização do projeto
 
