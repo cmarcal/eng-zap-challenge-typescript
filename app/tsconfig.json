@@ -3,10 +3,6 @@
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "baseUrl": ".",
-		"paths": {
-			"Root/*": ["src/*"],
-			"Components/*": ["src/components/*"]
-		},
     "types": ["node", "jest", "@testing-library/jest-dom"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -18,8 +14,10 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve"
+    "jsx": "react",
+    "allowSyntheticDefaultImports": true
+
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "next.config.js", "src/setupTests.ts", "src/**/*"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "next.config.js", "src/setupTests.ts", "src/**/*", "jest-transforme.js"],
   "exclude": ["node_modules"]
 }

@@ -1,12 +1,26 @@
 import React from 'react';
-import { fireEvent, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
+import { Button, Props } from '../Button';
 
 describe('Button Test', () => {
+	let props: Props;
+
 	beforeEach(() => {
-		renderComponent();
+		props = {
+			text: 'click here'
+		};
 	});
+	const renderComponent = () => render(<Button {...props} />);
 
 	it('should render component container', () => {
-		expect(screen.getByTestId('SidebarContainer')).toBeInTheDocument();
+		const { getByTestId } = renderComponent();
+
+		expect(getByTestId('ButtonContianer')).toBeInTheDocument();
+	});
+
+	it('should text render component', () => {
+		const { getByTestId } = renderComponent();
+
+		expect(getByTestId('ButtonContianer')).toHaveTextContent(props.text);
 	});
 });

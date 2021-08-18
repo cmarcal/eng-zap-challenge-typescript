@@ -1,17 +1,15 @@
 module.exports = {
+	// preset: 'ts-jest',
 	rootDir: './src',
   moduleFileExtensions: ['ts', 'tsx', 'js'],
-	testPathIgnorePatterns: ['node_modules/'],
+	testPathIgnorePatterns: ['node_modules/','next/'],
 	transform: {
-		'^.+\\.(ts|tsx)$': 'ts-jest'
+    '\\.tsx?$': 'ts-jest',
+    '\\.jsx?$': 'babel-jest',
 	},
-	testMatch: ['**/*.test.(ts|tsx)'],
+	testMatch: ['**/__tests__/**/*.ts?(x)', '**/*.test.ts?(x)'],
 	moduleDirectories: ['node_modules', 'src'],
   testEnvironment: 'jsdom',
-	moduleNameMapper: {
-		'^Root(.*)$': '<rootDir>/$1',
-		'^ComponentsCommon(.*)$': '<rootDir>/components/$1'
-	},
 	collectCoverage: true,
 	setupFilesAfterEnv: [ '<rootDir>/setupTests.ts'],
 	coverageThreshold: {
@@ -21,8 +19,17 @@ module.exports = {
       lines: 70,
     },
   },
-	coverageReporters: ['html', 'text', 'text-summary', 'coverage'],
+	coverageReporters: ['html', 'text', 'text-summary', 'cobertura'],
 	restoreMocks: true,
   clearMocks: true,
-  resetMocks: true
+  resetMocks: true,
+	globals: {
+    'ts-jest': {
+      tsConfig: '<rootDir>/tsconfig.json'
+    },
+  },
+  transformIgnorePatterns: [
+    '[/\\\\]node_modules[/\\\\](?!lodash-es/).+\\.(js|jsx|ts|tsx)$'
+  ],
+
 };
