@@ -1,4 +1,7 @@
 {
+  "env": {
+    "jest": true
+  },
   "extends": [
     "next", 
     "next/core-web-vitals",
@@ -20,9 +23,24 @@
   },
   "parser": "@typescript-eslint/parser",
   "rules": {
+    "quotes": ["error", "single"],
+    "no-use-before-define": "off",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
-    "react/jsx-uses-react": "error",
-    "react/jsx-uses-vars": "error",
-  }
+    "react/jsx-uses-react": "warn",
+    "react/jsx-uses-vars": "error"
+  },
+  "overrides": [
+		{
+			"files": ["*.js", "*.jsx"],
+			"rules": {
+				"@typescript-eslint/explicit-function-return-type": "off"
+			}
+		}
+	],
+  "settings": {
+		"react": {
+			"version": "detect" 
+		}
+	}
 }
