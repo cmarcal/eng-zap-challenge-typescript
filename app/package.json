@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint --ext .ts,.tsx src/ --max-warnings=0",
-    "test": "jest --config ./jest.config.js --collectCoverage --coverageDirectory=\"../coverage\" --ci --reporters=default --reporters=jest-junit --watchAll=false"
+    "test": "jest"
   },
   "dependencies": {
     "next": "11.1.0",
@@ -21,6 +21,7 @@
     "@babel/plugin-proposal-class-properties": "^7.12.1",
     "@babel/plugin-proposal-decorators": "^7.7.4",
     "@babel/plugin-proposal-optional-chaining": "^7.11.0",
+    "@babel/plugin-transform-typescript": "^7.15.0",
     "@babel/preset-env": "^7.15.0",
     "@babel/preset-react": "^7.14.5",
     "@babel/preset-typescript": "^7.15.0",
