@@ -8,7 +8,7 @@ describe('Button Test', () => {
 
 	beforeEach(() => {
 		props = {
-			text: 'click here',
+			content: 'click here',
 			onClick: jest.fn(() => null)
 		};
 	});
@@ -23,7 +23,7 @@ describe('Button Test', () => {
 	it('should text render component', () => {
 		const { getByTestId } = renderComponent();
 
-		expect(getByTestId('ButtonContianer')).toHaveTextContent(props.text);
+		expect(getByTestId('ButtonContianer')).toHaveTextContent(props.content as string);
 	});
 	it('should click its called', () => {
 		const mockClick = jest.fn();

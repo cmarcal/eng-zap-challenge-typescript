@@ -8,6 +8,7 @@ export const Header = () => {
   const { asPath } = useRouter()
 
   const getLogo = () => {
+    console.log(asPath)
     switch (asPath) {
       case 'zap':
         return <Zap />

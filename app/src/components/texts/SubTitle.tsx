@@ -4,7 +4,7 @@ import { SubTitleContainer } from './styles'
 
 export const SubTitle = ({text}: Props) => {
   return (
-    <SubTitleContainer>
+    <SubTitleContainer data-testid='SubTitleContainer'>
       {text}
     </SubTitleContainer>
   )

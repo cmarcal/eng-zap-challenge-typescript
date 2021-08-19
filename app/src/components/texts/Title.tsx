@@ -5,7 +5,7 @@ import { Props } from './ITexts'
 
 export const Title = ({text}: Props) => {
   return (
-    <TitleContainer>
+    <TitleContainer data-testid='TitleContainer'>
       {text}
     </TitleContainer>
   )
