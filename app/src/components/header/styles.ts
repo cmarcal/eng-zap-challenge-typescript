@@ -1,4 +1,3 @@
-import { colors } from '../../assets/colorsToken';
 import styled from 'styled-components';
 
 export const heightHeader = '50px';
@@ -12,4 +11,12 @@ export const HeaderContainer = styled.header`
   display: flex;
   align-items: center;
   width:100%;
+  & img {
+    width:10%;
+  }
+  @media (max-width:768px) {
+    & img {
+      width:30%;
+    }
+  }
 `

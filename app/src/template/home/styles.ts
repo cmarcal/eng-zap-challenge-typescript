@@ -11,12 +11,25 @@ export const DescriptionContainer = styled.div`
 		font-size: 1.8em;
 		width:60%;
 	}
+	@media (max-width: 768px) {
+		max-width:100%;
+		text-align: center;
+		& h1 {
+			font-size: 3em
+		}
+		& h4 {
+			font-size: 1.6em;
+			width:100%;
+		}
+	}
 `
 
 export const ButtonsContainer = styled.div`
 	display:flex;
 	gap: 16px;
-
+	@media (max-width: 768px) {
+		justify-content:center;
+	}
 `
 
 export const HomeContainer = styled.div`
@@ -30,5 +43,9 @@ export const HomeContainer = styled.div`
 	background-repeat: no-repeat;
 	display: flex;
 	align-items: center;
-	background-image: url('https://www.ctt.pt/contentAsset/raw-data/a44a7ee1-22d6-44d2-a499-c4a89cb8bc98/imagemBanner/d112c19d-c592-4522-857d-9519fbcf2747')
-`
+	background-image: url('https://www.ctt.pt/contentAsset/raw-data/a44a7ee1-22d6-44d2-a499-c4a89cb8bc98/imagemBanner/d112c19d-c592-4522-857d-9519fbcf2747');
+	@media (max-width: 768px) {
+		background-position: 77% center;
+
+	}
+	`

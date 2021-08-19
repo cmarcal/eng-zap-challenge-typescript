@@ -14,7 +14,7 @@ export const Header = () => {
       case 'vivaReal':
         return <VivaReal />
       default:
-        return <GroupZap width='10%'/>;
+        return <GroupZap />;
     }
   }
   return (
