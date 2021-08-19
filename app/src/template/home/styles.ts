@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const DescriptionContainer = styled.div`
 	max-width: 40%;
-	padding:0 16px ;
+	padding:0 32px ;
 
 	& h1 {
 		font-size: 4em

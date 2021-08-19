@@ -6,7 +6,7 @@ export const HeaderContainer = styled.header`
   position: absolute;
   top: 0;
   height: ${heightHeader};
-  padding: 8px 16px;
+  padding: 8px 32px;
   background-color: transparent;
   display: flex;
   align-items: center;

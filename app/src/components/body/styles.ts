@@ -1,5 +1,5 @@
-import { colors } from "src/assets/colorsToken";
-import styled from "styled-components";
+import { colors } from 'src/assets/colorsToken';
+import styled from 'styled-components';
 
 export const Body = styled.div`
   height: 100vh;
