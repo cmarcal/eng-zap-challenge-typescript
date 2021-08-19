@@ -18,7 +18,7 @@ export const Header = () => {
     }
   }
   return (
-    <HeaderContainer>
+    <HeaderContainer data-testid='HeaderContainer'>
       {getLogo()}
     </HeaderContainer>
   )
