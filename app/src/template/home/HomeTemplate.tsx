@@ -1,10 +1,9 @@
 import React from 'react';
-import { Button } from '../../components/buttons';
+import { HomeContainer } from './styles';
 
 export const HomeTemplate = () => {
 	return (
-		<div>
-			<Button text='primeiro botão' onClick={() => alert('cliquei')} />
-		</div>
+		<HomeContainer>
+		</HomeContainer>
 	);
 };
