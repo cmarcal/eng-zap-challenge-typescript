@@ -1,15 +1,16 @@
-import React, { ButtonHTMLAttributes } from 'react';
+import React, { ButtonHTMLAttributes, ReactElement } from 'react';
 import { ButtonContainer } from './styles';
 
 export interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
-	text: string;
+	content: string | ReactElement;
+	color?: string;
 }
 
 export const Button = (props: Props) => {
-	const { text, ...rest } = props;
+	const { content, color, ...rest } = props;
 	return (
-		<ButtonContainer data-testid='ButtonContianer' {...rest}>
-			{text}
+		<ButtonContainer  data-testid='ButtonContianer' color={color} {...rest}>
+			{content}
 		</ButtonContainer>
 	);
 };
