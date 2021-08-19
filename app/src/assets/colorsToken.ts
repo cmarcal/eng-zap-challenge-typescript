@@ -3,5 +3,6 @@ export const colors = {
   greenApp: '#159957',
   white: '#fdfdfd',
   ligthGrey: '#dcdcdc',
-  blueVivalReal: '#1190cd'
+  blueVivalReal: '#1190cd',
+  greenGroupZap: '#afb91d'
 }

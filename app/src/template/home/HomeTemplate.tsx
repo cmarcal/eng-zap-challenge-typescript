@@ -9,11 +9,11 @@ export const HomeTemplate = () => {
 		<HomeContainer>
 			<Header />
 			<DescriptionContainer >
-				<Title text='A sua nova casa está aqui com a gente!'/>
-				<SubTitle text='Alugue ou compre seu imóvel no conforto do sue sofá' />
+				<Title text='Prepare a mudança'/>
+				<SubTitle text='Aproveite nossas oportunidades, os melhores imóveis estão aqui' />
 				<ButtonsContainer>
-					<VivaRealButton onClick={()=> alert('click VivaRealButton')}/>
-					<ZapButton onClick={()=> alert('click ZapButton')}/>
+					<VivaRealButton widthBrand='60%' onClick={()=> alert('click VivaRealButton')}/>
+					<ZapButton widthBrand='35%' onClick={()=> alert('click ZapButton')}/>
 				</ButtonsContainer>
 			</DescriptionContainer>
 

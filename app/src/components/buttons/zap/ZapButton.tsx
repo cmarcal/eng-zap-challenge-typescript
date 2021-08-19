@@ -5,12 +5,12 @@ import { Button } from '../Button'
 
 interface Props {
   onClick(): void;
-
+  widthBrand?: string;
 }
 
-export const ZapButton = ({onClick}: Props) => {
+export const ZapButton = ({onClick, widthBrand}: Props) => {
   return (
-    <Button content={<Zap />} onClick={onClick} color={colors.white} />
+    <Button content={<Zap width={widthBrand} />} onClick={onClick} color={colors.white} />
 
   )
 }

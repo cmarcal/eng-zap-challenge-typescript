@@ -5,10 +5,11 @@ import { Button } from '../Button'
 
 interface Props {
   onClick(): void;
+  widthBrand?: string;
 }
 
-export const VivaRealButton = ({onClick}: Props) => {
+export const VivaRealButton = ({onClick, widthBrand}: Props) => {
   return (
-    <Button content={<VivaReal />} onClick={onClick} color={colors.blueVivalReal} />
+    <Button  content={<VivaReal width={widthBrand} />} onClick={onClick} color={colors.blueVivalReal} />
   )
 }

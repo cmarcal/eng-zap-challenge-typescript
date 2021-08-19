@@ -1,19 +1,29 @@
+import { colors } from 'src/assets/colorsToken';
 import styled from 'styled-components';
 
 export const DescriptionContainer = styled.div`
-	max-width: 40%;
-	padding:0 32px ;
+	max-width: 35%;
+	padding:0 48px;
 
 	& h1 {
-		font-size: 4em
+		font-size: 3.5em;
+		text-transform:uppercase;
+		color: ${colors.greenGroupZap};
+		letter-spacing:4px;
+		margin: 24px 0;
 	}
 	& h4 {
-		font-size: 1.8em;
-		width:60%;
+		font-size: 2.3em;
+		color: grey;
+		margin-top: 0;
+		letter-spacing:2px;
+
 	}
 	@media (max-width: 768px) {
 		max-width:100%;
 		text-align: center;
+		padding:0 32px;
+
 		& h1 {
 			font-size: 3em
 		}
@@ -26,8 +36,15 @@ export const DescriptionContainer = styled.div`
 
 export const ButtonsContainer = styled.div`
 	display:flex;
-	gap: 16px;
+	gap: 40px;
+	& button {
+		width: 40%;
+		height:50px;	
+	}
 	@media (max-width: 768px) {
+		& button {
+			width: 100%
+		}
 		justify-content:center;
 	}
 `
@@ -43,9 +60,9 @@ export const HomeContainer = styled.div`
 	background-repeat: no-repeat;
 	display: flex;
 	align-items: center;
-	background-image: url('https://www.ctt.pt/contentAsset/raw-data/a44a7ee1-22d6-44d2-a499-c4a89cb8bc98/imagemBanner/d112c19d-c592-4522-857d-9519fbcf2747');
+	background-image: url('https://unecentro.com.br/storage/blog_images/miniaturas/2021/01/empty-living-room-with-blue-sofa-plants-and-table-on-empty-white-wall-background-3d-rendering.jpg');
 	@media (max-width: 768px) {
-		background-position: 77% center;
+		background-position: 49% center;
 
 	}
 	`
