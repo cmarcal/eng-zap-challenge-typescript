@@ -39,7 +39,8 @@ export const ButtonsContainer = styled.div`
 	gap: 40px;
 	& button {
 		width: 40%;
-		height:50px;	
+		height:50px;
+		border-radius:50px;
 	}
 	@media (max-width: 768px) {
 		& button {

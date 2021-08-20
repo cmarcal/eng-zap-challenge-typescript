@@ -8,11 +8,10 @@ export const Header = () => {
   const { asPath } = useRouter()
 
   const getLogo = () => {
-    console.log(asPath)
-    switch (asPath) {
+    switch (asPath.substring(1)) {
       case 'zap':
         return <Zap />
-      case 'vivaReal':
+      case 'vivareal':
         return <VivaReal />
       default:
         return <GroupZap />;
