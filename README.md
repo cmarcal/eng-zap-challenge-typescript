@@ -7,10 +7,10 @@
 - Syled Component - para estilização
 - Jest - motor para teste
 - React Testing Libary - para testes unitário e integração
-- Axios - para fazer integração
+- fetch - para fazer integração
 - Prettier - para o lint do código
 - EsLint - para o lint do código
-- babel
+- babel - para o lint do código
 
 ### Ferramentas usada para ajudar durante a organização do projeto
 
