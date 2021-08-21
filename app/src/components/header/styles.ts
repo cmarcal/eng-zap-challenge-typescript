@@ -10,8 +10,7 @@ export const HeaderContainer = styled.header<{isHome: boolean}>`
     top: 0;
   `    
   }
-
-  background-color: ${({isHome}) => isHome ? 'transparent': colors.ligthGrey};
+  background-color: ${colors.opacityGray};
   height: ${heightHeader};
   padding: 0 48px;
   display: flex;

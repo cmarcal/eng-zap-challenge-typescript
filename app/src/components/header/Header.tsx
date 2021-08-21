@@ -13,7 +13,7 @@ export const Header = () => {
       case 'zap':
         return <Zap width='6%'/>
       case 'vivareal':
-        return <VivaReal width='10%'/>
+        return <VivaReal width='10%' headerBrand />
       default:
         return <GroupZap width='10%'/>;
     }
