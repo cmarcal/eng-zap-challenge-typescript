@@ -3,7 +3,6 @@ import { useRouter } from 'next/router'
 
 import { Title, SubTitle } from '../../components/texts';
 import { HomeContainer, DescriptionContainer, ButtonsContainer } from './styles';
-import { Header } from '../../components/header';
 import { VivaRealButton, ZapButton } from '../../components/buttons/';
 
 export const HomeTemplate = () => {
@@ -11,7 +10,6 @@ export const HomeTemplate = () => {
 
 	return (
 		<HomeContainer>
-			<Header />
 			<DescriptionContainer >
 				<Title text='Prepare a mudança'/>
 				<SubTitle text='Aproveite nossas oportunidades, os melhores imóveis estão aqui' />

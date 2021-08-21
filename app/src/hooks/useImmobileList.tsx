@@ -1,34 +1,68 @@
 import { useState, useCallback } from 'react';
+import { BasicImmobileList, ImmobileDTO } from '../services/IServices';
+import { getImmobileList } from '../services/get';
 
-type Filter = 'zap' | 'vivareal'
+export type ValidUrls = 'zap' | 'vivareal'
 
 interface ReturnHooks {
-  immobileList: any[]; 
+  immobileBasicList: any[]; 
   errGetList: string; 
   isLoading: boolean; 
-  handleImmobileList: (filter: Filter) => void;
+  handleImmobileList: (filter: ValidUrls, page?:number) => void;
 }
-
+const elmtsPerPage = 24;
 export const useImmobileList = (): ReturnHooks => {
-  const [immobileList, setImmobileList] = useState<Array<any>>([]);
+  const [immobileBasicList, setImmobileBasicList] = useState<Array<any>>([]);
   const [errGetList, setErrGetList] = useState<string>('');
   const [isLoading, setisLoading] = useState<boolean>(false);
 
-  const handleImmobileList = useCallback((filter: Filter) => {
+  const handleZapImmobileList = (data: Array<ImmobileDTO>):void => {
+    const tratedData = data.map(el => {
+      const {id, bathrooms ,bedrooms, images, pricingInfos} = el;
+      return {
+        id,
+        bathrooms,
+        bedrooms,
+        images,
+        pricingInfos
+      }
+    })
+    setImmobileBasicList(tratedData);
+
+  }
+  const handleVivaRealImmobileList = (data: Array<ImmobileDTO>):void => {
+    const tratedData = data.map(el => {
+      const {id, bathrooms ,bedrooms, images, pricingInfos} = el;
+      return {
+        id,
+        bathrooms,
+        bedrooms,
+        images,
+        pricingInfos
+      }
+    })
+    setImmobileBasicList(tratedData);
+  }
+
+  const handleImmobileList = useCallback((filter: ValidUrls, page: number = 1) => {
     setErrGetList('');
     setisLoading(true);
 
-    fetch(process.env.NEXT_PUBLIC_API as string)
+    getImmobileList()
       .then((response) => {
         response.json()
-        .then((data) =>{
-          console.log(data);
+        .then((data: Array<ImmobileDTO>) =>{
+          console.log(data[1])
+          const newArr = data.slice(0, elmtsPerPage)
+          
+          if(filter === 'zap') handleZapImmobileList(newArr)
+          if(filter === 'vivareal') handleVivaRealImmobileList(newArr)
+
         });
       }).catch((err) => {
         console.error('Failed retrieving information', err);
       });
-    setImmobileList([]);
   },[setisLoading, setErrGetList])
 
-  return { immobileList, errGetList, isLoading, handleImmobileList }
+  return { immobileBasicList, errGetList, isLoading, handleImmobileList }
 }

@@ -2,7 +2,8 @@ import '../styles/globals.css';
 import type { AppProps } from 'next/app';
 import React from 'react';
 import Head from 'next/head';
-import { Body } from 'src/components/body/styles';
+import { Body } from '../components/body/styles';
+import { Header } from '../components/header';
 
 function MyApp({ Component, pageProps }: AppProps) {
 	return (
@@ -12,6 +13,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 				<meta name='description' content='Aluguel e compras de imóveis | OLX Brasil | Zap | Viva Real' />
 			</Head>
 			<Body>
+				<Header />
 				<Component {...pageProps} />
 			</Body>
 		</>

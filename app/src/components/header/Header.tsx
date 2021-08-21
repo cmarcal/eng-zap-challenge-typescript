@@ -6,19 +6,21 @@ import { GroupZap, VivaReal, Zap } from '../brands'
 
 export const Header = () => {
   const { asPath } = useRouter()
+  const isHome = asPath === '/';
 
   const getLogo = () => {
     switch (asPath.substring(1)) {
       case 'zap':
-        return <Zap />
+        return <Zap width='6%'/>
       case 'vivareal':
-        return <VivaReal />
+        return <VivaReal width='10%'/>
       default:
-        return <GroupZap />;
+        return <GroupZap width='10%'/>;
     }
   }
+ 
   return (
-    <HeaderContainer data-testid='HeaderContainer'>
+    <HeaderContainer isHome={isHome} data-testid='HeaderContainer'>
       {getLogo()}
     </HeaderContainer>
   )
