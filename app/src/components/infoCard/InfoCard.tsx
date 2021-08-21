@@ -1,21 +1,65 @@
 import React from 'react'
-
+import { BasicImmobileList } from '../../services/IServices'
+import { InforCardContainer , BodyContainer, TileContainer, Price, ListInfoContainer ,ItemList, LinkButton} from './styles';
+import { Carousel } from '../carousel';
+import { FaShower, FaBed, FaCar } from 'react-icons/fa'
+import { Title } from '../texts';
+import { colors } from '../../assets/colorsToken';
+import router from 'next/router';
 interface Props {
-  id:string;
-  bathrooms: number;
-  bedrooms: number;
-  images: Array<string>;
-  businessType: string;
-  price: number;
-  yearlyIptu: number;
-  monthlyCondoFee: number;
+  info: BasicImmobileList;
+  companny: string;
 }
 
-export const InfoCard = (props: Props) => {
-  const {id, bathrooms, bedrooms, images, businessType, price, yearlyIptu, monthlyCondoFee} = props
+export const InfoCard = ({info, companny}: Props) => {
+  const {id, bathrooms, bedrooms, images, parkingSpaces, usableAreas, pricingInfos} = info;
+
+  const typeAnnouncement = (): string => {
+    switch (pricingInfos.businessType) {
+      case 'SALE':
+        return 'Imóvel para venda';
+
+      case 'RENTAL':
+        return 'Imóvel para aluguel';
+    
+      default:
+        return '';
+    }
+  }
+
+  const colorText = (): string => {
+    switch (companny) {
+      case 'zap':
+        return colors.orangeZap;
+      case 'vivareal':    
+        return colors.blueVivalReal;
+      default:
+        return '#333';
+    }
+  }
+
+  const valueImmobile = ()=> {
+    if (pricingInfos.businessType === 'SALE') return new Intl.NumberFormat('pt-BR', {style: 'currency', currency:'BRL' }).format(pricingInfos.price as unknown as number);
+    if (pricingInfos.businessType === 'RENTAL') return new Intl.NumberFormat('pt-BR', {style: 'currency', currency:'BRL' }).format(pricingInfos.rentalTotalPrice as unknown as number) 
+  }
+
   return (
-    <div>
-      
-    </div>
+    <InforCardContainer >
+      <Carousel images={images} sizeImages={{width: 7, height: 5}}/>
+      <BodyContainer>
+        <TileContainer>
+          <Title text={typeAnnouncement()} size='1.3em'/> 
+          <Price colorText={colorText()}>{valueImmobile()}</Price>
+        </TileContainer>
+        <ListInfoContainer>
+          <ItemList isBold > {usableAreas} m²</ItemList>
+          {bathrooms > 0 && <ItemList ><FaShower /> {bathrooms}</ItemList>}
+          {bedrooms > 0 && <ItemList><FaBed /> {bedrooms}</ItemList>}
+          {parkingSpaces > 0 && <ItemList><FaCar /> {parkingSpaces}</ItemList>}
+        </ListInfoContainer>
+          
+          <LinkButton onClick={()=>router.push('/')} colorText={colorText()}>Mais informações</LinkButton>
+      </BodyContainer>
+    </InforCardContainer>
   )
 }

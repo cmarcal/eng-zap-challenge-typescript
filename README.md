@@ -10,7 +10,8 @@
 - fetch - para fazer integração
 - Prettier - para o lint do código
 - EsLint - para o lint do código
-- babel - para o lint do código
+- react-responsive-carousel - Slider de imagens https://github.com/leandrowd/react-responsive-carousel
+- React Icons - https://github.com/react-icons/react-icons
 
 ### Ferramentas usada para ajudar durante a organização do projeto
 

@@ -1,4 +1,5 @@
 import React , {useEffect} from 'react'
+import { InfoCard } from '../../components/infoCard/InfoCard';
 import { useImmobileList , ValidUrls} from '../../hooks/useImmobileList';
 import { CompanyContainer } from './styles';
 
@@ -13,10 +14,11 @@ export const CompanyTemplate = ({path}: Props) => {
   useEffect(() => {
     path && handleImmobileList(path)
   }, [handleImmobileList, path])
-  console.log(immobileBasicList)
   return (
     <CompanyContainer>
-    
+      {immobileBasicList.map(el => (
+        <InfoCard key={el.id} info={el} companny={path}/>
+      ))}
     </CompanyContainer>
   )
 }

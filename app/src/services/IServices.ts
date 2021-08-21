@@ -11,6 +11,7 @@ export interface ImmobileDTO {
   parkingSpaces: number
   pricingInfos:PricingInfos;
   updatedAt: string;
+  usableAreas: number;
 
 }
 
@@ -28,6 +29,7 @@ export type PricingInfos = {
   monthlyCondoFee:string;
   price:string;
   yearlyIptu:string;
+  rentalTotalPrice?: number;
 }
 
 export interface BasicImmobileList {
@@ -36,4 +38,6 @@ export interface BasicImmobileList {
   bedrooms: number
   images: Array<string>;
   pricingInfos:PricingInfos;
+  parkingSpaces:number;
+  usableAreas: number;
 }

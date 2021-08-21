@@ -4,5 +4,6 @@ export const colors = {
   white: '#fdfdfd',
   ligthGrey: '#dcdcdc',
   blueVivalReal: '#1190cd',
-  greenGroupZap: '#afb91d'
+  greenGroupZap: '#afb91d',
+  orangeZap: '#ff5a00'
 }

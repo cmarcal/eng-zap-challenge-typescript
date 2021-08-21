@@ -18,13 +18,15 @@ export const useImmobileList = (): ReturnHooks => {
 
   const handleZapImmobileList = (data: Array<ImmobileDTO>):void => {
     const tratedData = data.map(el => {
-      const {id, bathrooms ,bedrooms, images, pricingInfos} = el;
+      const {id, bathrooms ,bedrooms, images, parkingSpaces, usableAreas, pricingInfos} = el;
       return {
         id,
         bathrooms,
         bedrooms,
         images,
-        pricingInfos
+        pricingInfos,
+        usableAreas,
+        parkingSpaces
       }
     })
     setImmobileBasicList(tratedData);
@@ -32,19 +34,21 @@ export const useImmobileList = (): ReturnHooks => {
   }
   const handleVivaRealImmobileList = (data: Array<ImmobileDTO>):void => {
     const tratedData = data.map(el => {
-      const {id, bathrooms ,bedrooms, images, pricingInfos} = el;
+      const {id, bathrooms ,bedrooms, images, pricingInfos, parkingSpaces, usableAreas} = el;
       return {
         id,
         bathrooms,
         bedrooms,
         images,
+        usableAreas,
+        parkingSpaces,
         pricingInfos
       }
     })
     setImmobileBasicList(tratedData);
   }
 
-  const handleImmobileList = useCallback((filter: ValidUrls, page: number = 1) => {
+  const handleImmobileList = useCallback((filter: ValidUrls, page: number = 0) => {
     setErrGetList('');
     setisLoading(true);
 
@@ -52,7 +56,6 @@ export const useImmobileList = (): ReturnHooks => {
       .then((response) => {
         response.json()
         .then((data: Array<ImmobileDTO>) =>{
-          console.log(data[1])
           const newArr = data.slice(0, elmtsPerPage)
           
           if(filter === 'zap') handleZapImmobileList(newArr)
