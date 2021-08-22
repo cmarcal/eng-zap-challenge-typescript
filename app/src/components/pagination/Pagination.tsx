@@ -1,7 +1,7 @@
 import React, { ReactElement, useState } from 'react'
 import { useGetCompannyColor } from 'src/hooks/useGetCompannyColor';
-import { ValidUrls } from '../../../hooks/useImmobileList';
-import { PaginationContainer, PaginationItem } from './styles';
+import { ValidUrls } from '../../hooks/useImmobileList';
+import { PaginationContainer, PaginationItem } from '../../template/company/components/styles';
 
 interface Props {
   totalItens: number;

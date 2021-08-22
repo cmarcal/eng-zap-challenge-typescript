@@ -2,7 +2,7 @@ import React , {useEffect, useState} from 'react'
 import { FiltersImmobileButton } from 'src/components/buttons/filtersImmobile/FiltersImmobileButton';
 import { FilterImmobile, useImmobileList , ValidUrls} from '../../hooks/useImmobileList';
 import { ImmobileList } from './components/ImmobileList';
-import { Pagination } from './components/Pagination';
+import { Pagination } from '../../components/pagination';
 import { CompanyContainer, ListContainer, FilterContainer } from './styles';
 
 interface Props {
