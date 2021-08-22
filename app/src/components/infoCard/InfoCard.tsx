@@ -4,7 +4,6 @@ import { InforCardContainer , BodyContainer, TileContainer, Price, ListInfoConta
 import { Carousel } from '../carousel';
 import { FaShower, FaBed, FaCar } from 'react-icons/fa'
 import { Title } from '../texts';
-import { colors } from '../../assets/colorsToken';
 import router from 'next/router';
 import { useInfoCard } from './useInfoCard';
 import { ImmobileContext } from '../../store/immobile/ImmobileContext';
@@ -22,7 +21,7 @@ export const InfoCard = ({info, companny}: Props): ReactElement => {
   const valueToFormat = pricingInfos.businessType === 'SALE' ? parseFloat(pricingInfos.price) : parseFloat(pricingInfos.rentalTotalPrice as string);
   
   const handleClickCard = () => {
-    router.push(goToPage);
+    router.push(goToPage, );
     immobileContextDispatch({type: 'CHANGE_IMMOBILE', immobileData: info})
   }
 

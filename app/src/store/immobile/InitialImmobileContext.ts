@@ -3,6 +3,8 @@ export const initialImmobileContext = {
   bathrooms: 0,
   bedrooms: 0,
   images: [''],
+  createdAt: '',
+  updatedAt: '',
   pricingInfos: {
     businessType:'',
     monthlyCondoFee:'',
@@ -12,7 +14,6 @@ export const initialImmobileContext = {
   },
   parkingSpaces: 0,
   usableAreas: 0,
-  city: '',
   geoLocation: {
     location: {lon: 0, lat: 0},
     precision: ''
