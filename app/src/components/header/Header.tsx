@@ -5,7 +5,7 @@ import { GroupZap, VivaReal, Zap } from '../brands'
 
 
 export const Header = () => {
-  const {  query } = useRouter()
+  const { query } = useRouter()
   const isHome = Object.keys(query).length === 0
 
   const getLogo = () => {
