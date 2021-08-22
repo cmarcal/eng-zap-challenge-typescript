@@ -29,7 +29,7 @@ export type PricingInfos = {
   monthlyCondoFee:string;
   price:string;
   yearlyIptu:string;
-  rentalTotalPrice?: number;
+  rentalTotalPrice?: string;
 }
 
 export interface BasicImmobileList {

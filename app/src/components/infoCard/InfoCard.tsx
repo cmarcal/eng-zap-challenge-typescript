@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { BasicImmobileList } from '../../services/IServices'
 import { InforCardContainer , BodyContainer, TileContainer, Price, ListInfoContainer ,ItemList, LinkButton} from './styles';
 import { Carousel } from '../carousel';
@@ -6,50 +6,26 @@ import { FaShower, FaBed, FaCar } from 'react-icons/fa'
 import { Title } from '../texts';
 import { colors } from '../../assets/colorsToken';
 import router from 'next/router';
+import { useInfoCard } from './useInfoCard';
 interface Props {
   info: BasicImmobileList;
   companny: string;
 }
 
-export const InfoCard = ({info, companny}: Props) => {
+export const InfoCard = ({info, companny}: Props): ReactElement => {
   const {id, bathrooms, bedrooms, images, parkingSpaces, usableAreas, pricingInfos} = info;
+  const { colorText, typeAnnouncement, valueImmobile } = useInfoCard();
 
-  const typeAnnouncement = (): string => {
-    switch (pricingInfos.businessType) {
-      case 'SALE':
-        return 'Imóvel para venda';
-
-      case 'RENTAL':
-        return 'Imóvel para aluguel';
-    
-      default:
-        return '';
-    }
-  }
-
-  const colorText = (): string => {
-    switch (companny) {
-      case 'zap':
-        return colors.orangeZap;
-      case 'vivareal':    
-        return colors.blueVivalReal;
-      default:
-        return '#333';
-    }
-  }
-
-  const valueImmobile = ()=> {
-    if (pricingInfos.businessType === 'SALE') return new Intl.NumberFormat('pt-BR', {style: 'currency', currency:'BRL' }).format(pricingInfos.price as unknown as number);
-    if (pricingInfos.businessType === 'RENTAL') return new Intl.NumberFormat('pt-BR', {style: 'currency', currency:'BRL' }).format(pricingInfos.rentalTotalPrice as unknown as number) 
-  }
-
+  const goToPage = `/${companny}/${id}`;
+  const valueToFormat = pricingInfos.businessType === 'SALE' ? parseFloat(pricingInfos.price) : parseFloat(pricingInfos.rentalTotalPrice as string);
+  
   return (
     <InforCardContainer >
       <Carousel images={images} sizeImages={{width: 7, height: 5}}/>
       <BodyContainer>
         <TileContainer>
-          <Title text={typeAnnouncement()} size='1.3em'/> 
-          <Price colorText={colorText()}>{valueImmobile()}</Price>
+          <Title text={typeAnnouncement(pricingInfos.businessType)} size='1.3em'/> 
+          <Price colorText={colorText(companny)}>{valueImmobile(valueToFormat)}</Price>
         </TileContainer>
         <ListInfoContainer>
           <ItemList isBold > {usableAreas} m²</ItemList>
@@ -58,7 +34,7 @@ export const InfoCard = ({info, companny}: Props) => {
           {parkingSpaces > 0 && <ItemList><FaCar /> {parkingSpaces}</ItemList>}
         </ListInfoContainer>
           
-          <LinkButton onClick={()=>router.push('/')} colorText={colorText()}>Mais informações</LinkButton>
+          <LinkButton onClick={()=>router.push(goToPage)} colorText={colorText(companny)}>Mais informações</LinkButton>
       </BodyContainer>
     </InforCardContainer>
   )

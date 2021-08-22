@@ -5,11 +5,11 @@ import { GroupZap, VivaReal, Zap } from '../brands'
 
 
 export const Header = () => {
-  const { asPath } = useRouter()
-  const isHome = asPath === '/';
+  const {  query } = useRouter()
+  const isHome = Object.keys(query).length === 0
 
   const getLogo = () => {
-    switch (asPath.substring(1)) {
+    switch (query.company) {
       case 'zap':
         return <Zap width='6%'/>
       case 'vivareal':
