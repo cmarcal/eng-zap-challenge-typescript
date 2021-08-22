@@ -2,6 +2,7 @@ import React , {useEffect, useState} from 'react'
 import { FiltersImmobileButton } from 'src/components/buttons/filtersImmobile/FiltersImmobileButton';
 import { FilterImmobile, useImmobileList , ValidUrls} from '../../hooks/useImmobileList';
 import { ImmobileList } from './components/ImmobileList';
+import { Pagination } from './components/Pagination';
 import { CompanyContainer, ListContainer, FilterContainer } from './styles';
 
 interface Props {
@@ -9,7 +10,9 @@ interface Props {
 }
 export const CompanyTemplate = ({path}: Props) => {
   const [activeFilter, setActiveFilter] = useState<FilterImmobile>('ALL')
-  const {handleImmobileList, errGetList, immobileBasicList, isLoading , handleImmobileListFilter} = useImmobileList()
+  const [activePage, setActivePage] = useState<number>(1)
+
+  const {handleImmobileList, errGetList, immobileBasicList, isLoading , totalItens, handleImmobileListFilter} = useImmobileList()
 
   useEffect(() => {
     path && handleImmobileList(path)
@@ -17,7 +20,13 @@ export const CompanyTemplate = ({path}: Props) => {
 
   const handleFilter = (immobileType: FilterImmobile) => {
     setActiveFilter(immobileType);
-    handleImmobileListFilter(path as ValidUrls, immobileType)
+    setActivePage(1);
+    handleImmobileListFilter(path as ValidUrls, immobileType, 1)
+  }
+
+  const handleChangePage = (page: number) => {
+    setActivePage(page)
+    handleImmobileListFilter(path as ValidUrls, activeFilter, page)
   }
 
   return (
@@ -28,6 +37,7 @@ export const CompanyTemplate = ({path}: Props) => {
       <ListContainer>
         <ImmobileList path={path} isLoading={isLoading} immobileBasicList={immobileBasicList}/>
       </ListContainer>
+      <Pagination activePage={activePage} changePage={handleChangePage} totalItens={totalItens} path={path as ValidUrls}/>
     </CompanyContainer>
   )
 }

@@ -7,26 +7,21 @@ export type FilterImmobile = 'RENTAL' | 'SALE' | 'ALL'
 interface ReturnHooks {
   immobileBasicList: BasicImmobileList[]; 
   errGetList: string; 
-  isLoading: boolean; 
-  handleImmobileList: (filter: ValidUrls, page?:number) => void;
-  handleImmobileListFilter: (companny: ValidUrls, immobileType: FilterImmobile) => void;
+  isLoading: boolean;
+  totalItens: number;
+  handleImmobileList: (filter: ValidUrls) => void;
+  handleImmobileListFilter: (companny: ValidUrls, immobileType: FilterImmobile, page:number) => void;
 }
 const elmtsPerPage = 24;
 export const useImmobileList = (): ReturnHooks => {
   const [immobileBasicList, setImmobileBasicList] = useState<Array<BasicImmobileList>>([]);
-  const [staticList, setStaticList] = useState<Array<BasicImmobileList>>([]);
+  const [staticList, setStaticList] = useState<Array<ImmobileDTO>>([]);
   const [errGetList, setErrGetList] = useState<string>('');
   const [isLoading, setisLoading] = useState<boolean>(false);
+  const [totalItens, setTotalItens] = useState<number>(0);
 
-  const handleImmobileListFilter = (companny: ValidUrls, immobileType: FilterImmobile) => {
-    if (immobileType === 'ALL') return setImmobileBasicList(staticList);
-
-    const filterList = staticList.filter(el => el.pricingInfos.businessType === immobileType);
-    setImmobileBasicList(filterList);
-  }
-
-  const handleZapImmobileList = (data: Array<ImmobileDTO>):void => {
-    const tratedData = data.map(el => {
+  const tratedBasicList = (data: Array<ImmobileDTO>): Array<BasicImmobileList> => ( 
+     data.map(el => {
       const {id, bathrooms ,bedrooms, images, parkingSpaces, usableAreas, pricingInfos} = el;
       return {
         id,
@@ -38,31 +33,41 @@ export const useImmobileList = (): ReturnHooks => {
         parkingSpaces
       }
     })
-    setisLoading(false);
-    setStaticList(tratedData);
-    setImmobileBasicList(tratedData);
+  )
 
+  const handleImmobileListFilter = (companny: ValidUrls, immobileType: FilterImmobile, page: number) => {
+    const shallowList = [...staticList]
+    const skip = (page - 1) * elmtsPerPage 
+    console.log({immobileType, skip});
+    if (immobileType === 'ALL') {
+      const listWithPagination = shallowList.slice(skip , page *  elmtsPerPage);
+      console.log(listWithPagination)
+      setTotalItens(staticList.length);
+
+      return setImmobileBasicList(tratedBasicList(listWithPagination));
+    }
+
+    const filterList = shallowList.filter(el => el.pricingInfos.businessType === immobileType);
+    setTotalItens(filterList.length);
+
+    setImmobileBasicList(filterList.slice(skip , page *  elmtsPerPage));
   }
 
-  const handleVivaRealImmobileList = (data: Array<ImmobileDTO>):void => {
-    const tratedData = data.map(el => {
-      const {id, bathrooms ,bedrooms, images, pricingInfos, parkingSpaces, usableAreas} = el;
-      return {
-        id,
-        bathrooms,
-        bedrooms,
-        images,
-        usableAreas,
-        parkingSpaces,
-        pricingInfos
-      }
-    })
+  const handleZapImmobileList = useCallback((data: Array<ImmobileDTO>):void => {
+    const tratedData = tratedBasicList(data);
     setisLoading(false);
-    setStaticList(tratedData);
     setImmobileBasicList(tratedData);
-  }
 
-  const handleImmobileList = useCallback((filter: ValidUrls, page: number = 0) => {
+  },[])
+
+  const handleVivaRealImmobileList = useCallback((data: Array<ImmobileDTO>):void => {
+    const tratedData = tratedBasicList(data);
+
+    setisLoading(false);
+    setImmobileBasicList(tratedData);
+  },[])
+
+  const handleImmobileList = useCallback((filter: ValidUrls) => {
     setErrGetList('');
     setisLoading(true);
 
@@ -70,8 +75,11 @@ export const useImmobileList = (): ReturnHooks => {
       .then((response) => {
         response.json()
         .then((data: Array<ImmobileDTO>) =>{
-          const newArr = data.slice(0, elmtsPerPage)
-          
+        
+          const newArr = data.slice(0, elmtsPerPage);
+          setTotalItens(data.length);
+          setStaticList(data);
+
           if(filter === 'zap') handleZapImmobileList(newArr)
           if(filter === 'vivareal') handleVivaRealImmobileList(newArr)
 
@@ -79,7 +87,7 @@ export const useImmobileList = (): ReturnHooks => {
       }).catch((err) => {
         console.error('Failed retrieving information', err);
       });
-  },[setisLoading, setErrGetList])
+  },[handleZapImmobileList, handleVivaRealImmobileList])
 
-  return { immobileBasicList, errGetList, isLoading, handleImmobileList, handleImmobileListFilter }
+  return { immobileBasicList, errGetList, isLoading, totalItens, handleImmobileList, handleImmobileListFilter }
 }
