@@ -14,7 +14,7 @@ interface Props {
 
 export const InfoCard = ({info, companny}: Props): ReactElement => {
   const {id, bathrooms, bedrooms, images, parkingSpaces, usableAreas, pricingInfos} = info;
-  const { colorText, typeAnnouncement, valueImmobile } = useInfoCard();
+  const { colorTextByCompanny, typeAnnouncement, valueImmobile } = useInfoCard();
 
   const goToPage = `/${companny}/${id}`;
   const valueToFormat = pricingInfos.businessType === 'SALE' ? parseFloat(pricingInfos.price) : parseFloat(pricingInfos.rentalTotalPrice as string);
@@ -25,7 +25,7 @@ export const InfoCard = ({info, companny}: Props): ReactElement => {
       <BodyContainer>
         <TileContainer>
           <Title text={typeAnnouncement(pricingInfos.businessType)} size='1.3em'/> 
-          <Price colorText={colorText(companny)}>{valueImmobile(valueToFormat)}</Price>
+          <Price colorText={colorTextByCompanny(companny)}>{valueImmobile(valueToFormat)}</Price>
         </TileContainer>
         <ListInfoContainer>
           <ItemList isBold > {usableAreas} m²</ItemList>
@@ -34,7 +34,7 @@ export const InfoCard = ({info, companny}: Props): ReactElement => {
           {parkingSpaces > 0 && <ItemList><FaCar /> {parkingSpaces}</ItemList>}
         </ListInfoContainer>
           
-          <LinkButton onClick={()=>router.push(goToPage)} colorText={colorText(companny)}>Mais informações</LinkButton>
+          <LinkButton onClick={()=>router.push(goToPage)} colorText={colorTextByCompanny(companny)}>Mais informações</LinkButton>
       </BodyContainer>
     </InforCardContainer>
   )

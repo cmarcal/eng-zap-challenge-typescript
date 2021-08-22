@@ -17,6 +17,7 @@ export const HeaderContainer = styled.header<{isHome: boolean}>`
   align-items: center;
   width:100%;
   z-index:2;
+  justify-content: space-between;
  
   @media (max-width:768px) {
     padding: 8px 32px;
@@ -24,5 +25,18 @@ export const HeaderContainer = styled.header<{isHome: boolean}>`
     & img {
       width:30%;
     }
+  }
+`
+export const NavigationContainer = styled.ul `
+  padding-left:0;
+  display: flex;
+  gap: 24px;
+`
+export const NavigationItens = styled.li<{colorText: string}> `
+  list-style-type: none;
+  cursor: pointer;
+  font-size: 1.25rem;
+  &:hover {
+    color: ${({colorText}) => colorText}
   }
 `

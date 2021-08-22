@@ -14,7 +14,7 @@ export const GroupButtonContianer = styled.div`
 
 export const Buttons = styled.button<{color: string, isActive: boolean;}>`
   background-color: ${({color, isActive}) => isActive ? color : colors.white};
-
+  font-size: 1rem;
   border: 1px solid ${({color}) => color}; 
   color: ${({color, isActive}) => isActive ? colors.white: color }; 
   padding: 10px 24px; 
