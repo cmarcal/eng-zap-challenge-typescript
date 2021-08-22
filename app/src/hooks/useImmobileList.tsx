@@ -3,18 +3,27 @@ import { BasicImmobileList, ImmobileDTO } from '../services/IServices';
 import { getImmobileList } from '../services/get';
 
 export type ValidUrls = 'zap' | 'vivareal'
-
+export type FilterImmobile = 'RENTAL' | 'SALE' | 'ALL'
 interface ReturnHooks {
-  immobileBasicList: any[]; 
+  immobileBasicList: BasicImmobileList[]; 
   errGetList: string; 
   isLoading: boolean; 
   handleImmobileList: (filter: ValidUrls, page?:number) => void;
+  handleImmobileListFilter: (companny: ValidUrls, immobileType: FilterImmobile) => void;
 }
 const elmtsPerPage = 24;
 export const useImmobileList = (): ReturnHooks => {
-  const [immobileBasicList, setImmobileBasicList] = useState<Array<any>>([]);
+  const [immobileBasicList, setImmobileBasicList] = useState<Array<BasicImmobileList>>([]);
+  const [staticList, setStaticList] = useState<Array<BasicImmobileList>>([]);
   const [errGetList, setErrGetList] = useState<string>('');
   const [isLoading, setisLoading] = useState<boolean>(false);
+
+  const handleImmobileListFilter = (companny: ValidUrls, immobileType: FilterImmobile) => {
+    if (immobileType === 'ALL') return setImmobileBasicList(staticList);
+
+    const filterList = staticList.filter(el => el.pricingInfos.businessType === immobileType);
+    setImmobileBasicList(filterList);
+  }
 
   const handleZapImmobileList = (data: Array<ImmobileDTO>):void => {
     const tratedData = data.map(el => {
@@ -30,10 +39,11 @@ export const useImmobileList = (): ReturnHooks => {
       }
     })
     setisLoading(false);
-
+    setStaticList(tratedData);
     setImmobileBasicList(tratedData);
 
   }
+
   const handleVivaRealImmobileList = (data: Array<ImmobileDTO>):void => {
     const tratedData = data.map(el => {
       const {id, bathrooms ,bedrooms, images, pricingInfos, parkingSpaces, usableAreas} = el;
@@ -48,7 +58,7 @@ export const useImmobileList = (): ReturnHooks => {
       }
     })
     setisLoading(false);
-
+    setStaticList(tratedData);
     setImmobileBasicList(tratedData);
   }
 
@@ -71,5 +81,5 @@ export const useImmobileList = (): ReturnHooks => {
       });
   },[setisLoading, setErrGetList])
 
-  return { immobileBasicList, errGetList, isLoading, handleImmobileList }
+  return { immobileBasicList, errGetList, isLoading, handleImmobileList, handleImmobileListFilter }
 }

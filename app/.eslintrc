@@ -29,7 +29,6 @@
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "react/jsx-uses-react": "warn",
-    "react/jsx-uses-vars": "error",
     "no-unused-vars": "off",
     
   },
