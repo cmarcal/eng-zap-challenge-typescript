@@ -1,11 +1,17 @@
-import '../styles/globals.css';
+import React , {useReducer} from 'react';
 import type { AppProps } from 'next/app';
-import React from 'react';
 import Head from 'next/head';
 import { Body } from '../components/body/styles';
 import { Header } from '../components/header';
+import { ImmobileContext } from '../store/immobile/ImmobileContext';
+import immobileContextReducer from '../store/immobile/ImmobileContextReducer';
+import {initialImmobileContext} from '../store/immobile/InitialImmobileContext';
+import '../styles/globals.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
+	const [immobileContextState, immobileContextDispatch] = useReducer(immobileContextReducer, initialImmobileContext);
+
+	const immobileContext = {immobileContextState, immobileContextDispatch}
 	return (
 		<>
 			<Head>
@@ -14,7 +20,9 @@ function MyApp({ Component, pageProps }: AppProps) {
 			</Head>
 			<Body>
 				<Header />
-				<Component {...pageProps} />
+				<ImmobileContext.Provider value={immobileContext}>
+					<Component {...pageProps} />
+				</ImmobileContext.Provider>
 			</Body>
 		</>
 	);

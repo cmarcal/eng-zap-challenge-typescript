@@ -1,11 +1,11 @@
 import { useState, useCallback } from 'react';
-import { BasicImmobileList, ImmobileDTO } from '../services/IServices';
+import { ImmobileDTO } from '../services/IServices';
 import { getImmobileList } from '../services/get';
 
 export type ValidUrls = 'zap' | 'vivareal'
 export type FilterImmobile = 'RENTAL' | 'SALE' | 'ALL'
 interface ReturnHooks {
-  immobileBasicList: BasicImmobileList[]; 
+  immobileBasicList: ImmobileDTO[]; 
   errGetList: string; 
   isLoading: boolean;
   totalItens: number;
@@ -14,28 +14,14 @@ interface ReturnHooks {
 }
 const elmtsPerPage = 24;
 export const useImmobileList = (): ReturnHooks => {
-  const [immobileBasicList, setImmobileBasicList] = useState<Array<BasicImmobileList>>([]);
+  const [immobileBasicList, setImmobileBasicList] = useState<Array<ImmobileDTO>>([]);
   const [staticList, setStaticList] = useState<Array<ImmobileDTO>>([]);
   const [errGetList, setErrGetList] = useState<string>('');
   const [isLoading, setisLoading] = useState<boolean>(false);
   const [totalItens, setTotalItens] = useState<number>(0);
 
-  const tratedBasicList = (data: Array<ImmobileDTO>): Array<BasicImmobileList> => ( 
-     data.map(el => {
-      const {id, bathrooms ,bedrooms, images, parkingSpaces, usableAreas, pricingInfos} = el;
-      return {
-        id,
-        bathrooms,
-        bedrooms,
-        images,
-        pricingInfos,
-        usableAreas,
-        parkingSpaces
-      }
-    })
-  )
 
-  const handleImmobileListFilter = (companny: ValidUrls, immobileType: FilterImmobile, page: number) => {
+  const handleImmobileListFilter = useCallback((companny: ValidUrls, immobileType: FilterImmobile, page: number) => {
     const shallowList = [...staticList]
     const skip = (page - 1) * elmtsPerPage;
 
@@ -43,27 +29,24 @@ export const useImmobileList = (): ReturnHooks => {
       const listWithPagination = shallowList.slice(skip , page *  elmtsPerPage);
       setTotalItens(staticList.length);
 
-      return setImmobileBasicList(tratedBasicList(listWithPagination));
+      return setImmobileBasicList(listWithPagination);
     }
 
     const filterList = shallowList.filter(el => el.pricingInfos.businessType === immobileType);
     setTotalItens(filterList.length);
 
-    setImmobileBasicList(tratedBasicList(filterList).slice(skip , page *  elmtsPerPage));
-  }
+    setImmobileBasicList(filterList.slice(skip , page *  elmtsPerPage));
+  },[staticList])
 
   const handleZapImmobileList = useCallback((data: Array<ImmobileDTO>):void => {
-    const tratedData = tratedBasicList(data);
     setisLoading(false);
-    setImmobileBasicList(tratedData);
+    setImmobileBasicList(data);
 
   },[])
 
   const handleVivaRealImmobileList = useCallback((data: Array<ImmobileDTO>):void => {
-    const tratedData = tratedBasicList(data);
-
     setisLoading(false);
-    setImmobileBasicList(tratedData);
+    setImmobileBasicList(data);
   },[])
 
   const handleImmobileList = useCallback((filter: ValidUrls) => {
@@ -87,6 +70,8 @@ export const useImmobileList = (): ReturnHooks => {
         console.error('Failed retrieving information', err);
       });
   },[handleZapImmobileList, handleVivaRealImmobileList])
+
+   
 
   return { immobileBasicList, errGetList, isLoading, totalItens, handleImmobileList, handleImmobileListFilter }
 }

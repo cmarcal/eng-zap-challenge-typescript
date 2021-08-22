@@ -32,12 +32,3 @@ export type PricingInfos = {
   rentalTotalPrice?: string;
 }
 
-export interface BasicImmobileList {
-  id: string;
-  bathrooms: number
-  bedrooms: number
-  images: Array<string>;
-  pricingInfos:PricingInfos;
-  parkingSpaces:number;
-  usableAreas: number;
-}

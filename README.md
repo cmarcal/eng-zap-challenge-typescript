@@ -3,6 +3,7 @@
 ### Linguaguem e frameworks utilizados para contrução do projeto
 
 - React com Next
+- Context Api para salvar os dados de um imóvel específico
 - Typescript
 - Syled Component - para estilização
 - Jest - motor para teste

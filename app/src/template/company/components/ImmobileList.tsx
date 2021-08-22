@@ -1,12 +1,12 @@
 import React from 'react'
-import { BasicImmobileList } from '../../../services/IServices'
+import { ImmobileDTO } from '../../../services/IServices'
 import { LoadingSkeleton } from '../../../components/infoCard/loadingSkeleton/LoadingSkeleton';
 import { InfoCard } from '../../../components/infoCard/InfoCard';
 import { ValidUrls } from '../../../hooks/useImmobileList';
 
 interface Props {
   isLoading: boolean;
-  immobileBasicList: Array<BasicImmobileList>
+  immobileBasicList: Array<ImmobileDTO>
   path: ValidUrls | '' 
 }
 
