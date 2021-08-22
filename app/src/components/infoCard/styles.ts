@@ -24,6 +24,11 @@ export const Price = styled.span<{colorText: string}> `
   color: ${({colorText}) => colorText};
   font-weight: 600;
   font-size:1.5rem;
+
+  @media (max-width: 768px) {
+    font-size:1rem;
+
+  }
 `
 
 export const ListInfoContainer = styled.ul`

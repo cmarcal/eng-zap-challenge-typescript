@@ -7,6 +7,9 @@ export const PaginationContainer = styled.ul `
   align-items: center;
   justify-content: center;
   margin: 40px 0 0 0 ;
+  @media (max-width: 768px) {
+    flex-flow: wrap;
+  }
 `
 export const PaginationItem = styled.li<{colorText: string, activeItem: boolean}> `
   list-style-type: none;
