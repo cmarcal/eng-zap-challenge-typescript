@@ -29,6 +29,8 @@ export const useImmobileList = (): ReturnHooks => {
         parkingSpaces
       }
     })
+    setisLoading(false);
+
     setImmobileBasicList(tratedData);
 
   }
@@ -45,6 +47,8 @@ export const useImmobileList = (): ReturnHooks => {
         pricingInfos
       }
     })
+    setisLoading(false);
+
     setImmobileBasicList(tratedData);
   }
 

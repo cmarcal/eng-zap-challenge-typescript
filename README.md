@@ -12,6 +12,7 @@
 - EsLint - para o lint do código
 - react-responsive-carousel - Slider de imagens https://github.com/leandrowd/react-responsive-carousel
 - React Icons - https://github.com/react-icons/react-icons
+- Loading com skeleton  - react-loading-skeleton https://github.com/dvtng/react-loading-skeleton#readme
 
 ### Ferramentas usada para ajudar durante a organização do projeto
 
