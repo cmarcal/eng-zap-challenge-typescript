@@ -37,11 +37,10 @@ export const useImmobileList = (): ReturnHooks => {
 
   const handleImmobileListFilter = (companny: ValidUrls, immobileType: FilterImmobile, page: number) => {
     const shallowList = [...staticList]
-    const skip = (page - 1) * elmtsPerPage 
-    console.log({immobileType, skip});
+    const skip = (page - 1) * elmtsPerPage;
+
     if (immobileType === 'ALL') {
       const listWithPagination = shallowList.slice(skip , page *  elmtsPerPage);
-      console.log(listWithPagination)
       setTotalItens(staticList.length);
 
       return setImmobileBasicList(tratedBasicList(listWithPagination));
@@ -50,7 +49,7 @@ export const useImmobileList = (): ReturnHooks => {
     const filterList = shallowList.filter(el => el.pricingInfos.businessType === immobileType);
     setTotalItens(filterList.length);
 
-    setImmobileBasicList(filterList.slice(skip , page *  elmtsPerPage));
+    setImmobileBasicList(tratedBasicList(filterList).slice(skip , page *  elmtsPerPage));
   }
 
   const handleZapImmobileList = useCallback((data: Array<ImmobileDTO>):void => {
