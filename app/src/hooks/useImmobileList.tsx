@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import { ImmobileDTO } from '../services/IServices';
 import { getImmobileList } from '../services/get';
-import { validationLatandLon } from './helpAuxFunctions';
+import { validationLatandLon, rulesVivaReal, rulesZap } from './helpAuxFunctions';
 
 export type ValidUrls = 'zap' | 'vivareal'
 export type FilterImmobile = 'RENTAL' | 'SALE' | 'ALL'
@@ -44,13 +44,20 @@ export const useImmobileList = (): ReturnHooks => {
 
   const handleZapImmobileList = useCallback((data: Array<ImmobileDTO>):void => {
     setisLoading(false);
-    setImmobileBasicList(data);
+    const zapList = rulesZap(data);
+    setStaticList(zapList);
+    setTotalItens(zapList.length);
+
+    setImmobileBasicList(zapList.slice(0, elmtsPerPage));
 
   },[])
 
   const handleVivaRealImmobileList = useCallback((data: Array<ImmobileDTO>):void => {
     setisLoading(false);
-    setImmobileBasicList(data);
+    const vivarealList = rulesVivaReal(data);
+    setStaticList(vivarealList);
+    setTotalItens(vivarealList.length);
+    setImmobileBasicList(vivarealList.slice(0, elmtsPerPage));
   },[])
 
   const handleImmobileList = useCallback((filter: ValidUrls) => {
@@ -62,12 +69,10 @@ export const useImmobileList = (): ReturnHooks => {
         response.json()
         .then((data: Array<ImmobileDTO>) =>{
           const tratedLatandLon = validationLatandLon(data);
-          const newArr = tratedLatandLon.slice(0, elmtsPerPage);
-          setTotalItens(tratedLatandLon.length);
-          setStaticList(tratedLatandLon);
+       
 
-          if(filter === 'zap') handleZapImmobileList(newArr)
-          if(filter === 'vivareal') handleVivaRealImmobileList(newArr)
+          if(filter === 'zap') handleZapImmobileList(tratedLatandLon)
+          if(filter === 'vivareal') handleVivaRealImmobileList(tratedLatandLon)
 
         });
       }).catch((err) => {
