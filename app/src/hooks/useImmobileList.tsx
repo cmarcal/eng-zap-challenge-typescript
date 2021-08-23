@@ -15,7 +15,7 @@ interface ReturnHooks {
   handleImmobileListFilter: (companny: ValidUrls, immobileType: FilterImmobile, page:number) => void;
   getImmobileById: (id: string) => void;
 }
-const elmtsPerPage = 24;
+const elmtsPerPage = 20;
 export const useImmobileList = (): ReturnHooks => {
   const [immobileBasicList, setImmobileBasicList] = useState<Array<ImmobileDTO>>([]);
   const [currentImmobile, setCurrentImmobile] = useState<ImmobileDTO>();

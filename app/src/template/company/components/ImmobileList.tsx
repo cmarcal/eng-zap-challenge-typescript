@@ -13,7 +13,7 @@ interface Props {
 export const ImmobileList = ({isLoading, immobileBasicList, path}: Props) => {
   return (
     <>
-      {isLoading && <LoadingSkeleton amountSkeletons={24} />}
+      {isLoading && <LoadingSkeleton amountSkeletons={20} />}
       {immobileBasicList.map(el => (
         <InfoCard key={el.id} info={el} companny={path}/>
       ))}

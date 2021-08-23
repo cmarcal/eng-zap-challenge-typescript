@@ -14,7 +14,7 @@ export const Pagination = ({totalItens, path, activePage, changePage}: Props) =>
   const {colorTextByCompanny} = useGetCompannyColor();
 
   const paginationItens = (): Array<ReactElement> => {
-    const totalPage = totalItens / 24;
+    const totalPage = totalItens / 20;
     const pages = [];
 
     for (let index = 1; index <= totalPage; index++) {
