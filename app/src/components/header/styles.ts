@@ -18,6 +18,10 @@ export const HeaderContainer = styled.header<{isHome: boolean}>`
   width:100%;
   z-index:2;
   justify-content: space-between;
+
+  & img {
+    cursor: pointer;
+  }
  
   @media (max-width:768px) {
     padding: 8px 32px;

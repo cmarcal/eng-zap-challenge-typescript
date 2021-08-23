@@ -12,7 +12,6 @@ export interface ImmobileDTO {
   pricingInfos:PricingInfos;
   updatedAt: string;
   usableAreas: number;
-
 }
 
 export type Address = {

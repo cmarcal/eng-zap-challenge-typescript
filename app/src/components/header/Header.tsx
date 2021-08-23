@@ -17,11 +17,11 @@ export const Header = (): ReactElement => {
   const getLogo = () => {
     switch (query.company) {
       case 'zap':
-        return <Zap width='6%'/>
+        return <Zap onClick={()=> push('/zap')} width='6%'/>
       case 'vivareal':
-        return <VivaReal width='10%' headerBrand />
+        return <VivaReal onClick={()=> push('/vivareal')}  width='10%' headerBrand />
       default:
-        return <GroupZap width='10%'/>;
+        return <GroupZap onClick={()=> push('/')}  width='10%'/>;
     }
   }
 

@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react';
 import { ImmobileDTO } from '../services/IServices';
 import { getImmobileList } from '../services/get';
+import { validationLatandLon } from './helpAuxFunctions';
 
 export type ValidUrls = 'zap' | 'vivareal'
 export type FilterImmobile = 'RENTAL' | 'SALE' | 'ALL'
@@ -57,10 +58,10 @@ export const useImmobileList = (): ReturnHooks => {
       .then((response) => {
         response.json()
         .then((data: Array<ImmobileDTO>) =>{
-        
-          const newArr = data.slice(0, elmtsPerPage);
-          setTotalItens(data.length);
-          setStaticList(data);
+          const tratedLatandLon = validationLatandLon(data);
+          const newArr = tratedLatandLon.slice(0, elmtsPerPage);
+          setTotalItens(tratedLatandLon.length);
+          setStaticList(tratedLatandLon);
 
           if(filter === 'zap') handleZapImmobileList(newArr)
           if(filter === 'vivareal') handleVivaRealImmobileList(newArr)

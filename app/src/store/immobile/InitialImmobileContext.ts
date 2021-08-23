@@ -14,9 +14,12 @@ export const initialImmobileContext = {
   },
   parkingSpaces: 0,
   usableAreas: 0,
-  geoLocation: {
-    location: {lon: 0, lat: 0},
-    precision: ''
-  },
-  neighborhood: '',
+  address: {
+    geoLocation: {
+      location: {lon: 0, lat: 0},
+      precision: '',
+    },
+    city: '',
+    neighborhood: '',
+  }
 }

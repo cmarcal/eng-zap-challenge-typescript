@@ -3,9 +3,9 @@ import { TitleContainer } from './styles'
 import { Props } from './ITexts'
 
 
-export const Title = ({text, size}: Props) => {
+export const Title = ({text, size, color}: Props) => {
   return (
-    <TitleContainer size={size} data-testid='TitleContainer'>
+    <TitleContainer color={color} size={size} data-testid='TitleContainer'>
       {text}
     </TitleContainer>
   )
