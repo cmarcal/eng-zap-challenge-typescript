@@ -1,10 +1,4 @@
-const headers = new Headers();
+import { AxiosResponse } from 'axios';
+import { get } from './apiService';
 
-const initialGet: any = { 
-  method: 'GET',
-  headers: headers,
-  mode: 'cors',
-  cache: 'default' 
-}
-
-export const getImmobileList = async() => await fetch(process.env.NEXT_PUBLIC_API as string, initialGet)
+export const getImmobileList = async(): Promise<AxiosResponse> => get(process.env.NEXT_PUBLIC_API as string)

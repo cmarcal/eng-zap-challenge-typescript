@@ -8,7 +8,7 @@
 - Syled Component - para estilização
 - Jest - motor para teste
 - React Testing Libary - para testes unitário e integração
-- fetch - para fazer integração
+- Axios - para fazer integração
 - Prettier - para o lint do código
 - EsLint - para o lint do código
 - react-responsive-carousel - Slider de imagens https://github.com/leandrowd/react-responsive-carousel

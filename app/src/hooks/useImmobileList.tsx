@@ -65,16 +65,12 @@ export const useImmobileList = (): ReturnHooks => {
     setisLoading(true);
 
     getImmobileList()
-      .then((response) => {
-        response.json()
-        .then((data: Array<ImmobileDTO>) =>{
-          const tratedLatandLon = validationLatandLon(data);
-       
+      .then(({data}) =>{
+        const tratedLatandLon = validationLatandLon(data);
 
-          if(filter === 'zap') handleZapImmobileList(tratedLatandLon)
-          if(filter === 'vivareal') handleVivaRealImmobileList(tratedLatandLon)
-
-        });
+        if(filter === 'zap') handleZapImmobileList(tratedLatandLon)
+        if(filter === 'vivareal') handleVivaRealImmobileList(tratedLatandLon)
+ 
       }).catch((err) => {
         console.error('Failed retrieving information', err);
       });
@@ -84,13 +80,10 @@ export const useImmobileList = (): ReturnHooks => {
   const getImmobileById = useCallback((id: string) => {
     setisLoading(true);
     getImmobileList()
-    .then((response) => {
-      response.json()
-      .then((data: Array<ImmobileDTO>) =>{
+      .then(({data}) =>{
         const tratedLatandLon = validationLatandLon(data);
         const localImmobile = tratedLatandLon.filter(elt => elt.id === id);
         setCurrentImmobile(localImmobile[0] || null)
-      });
     }).catch((err) => {
       console.error('Failed retrieving information', err);
     });
