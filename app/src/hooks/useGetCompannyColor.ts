@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react'
-import { colors } from 'src/assets/colorsToken';
+import { colors } from '../assets/colorsToken';
 
 interface ReturnHooks {
   colorCompanny(companny: string): string

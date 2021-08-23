@@ -1,17 +1,17 @@
 export interface ImmobileDTO {
-  address: Address
+  id: string
   bathrooms: number
   bedrooms: number
-  createdAt: string
-  id: string
   images: Array<string>;
+  createdAt: string
+  updatedAt: string;
+  pricingInfos:PricingInfos;
+  parkingSpaces: number
+  usableAreas: number;
+  address: Address
   listingStatus: string
   listingType: string
   owner: boolean
-  parkingSpaces: number
-  pricingInfos:PricingInfos;
-  updatedAt: string;
-  usableAreas: number;
 }
 
 export type Address = {
