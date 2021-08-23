@@ -10,12 +10,15 @@ interface ReturnHooks {
   errGetList: string; 
   isLoading: boolean;
   totalItens: number;
+  currentImmobile: ImmobileDTO | undefined;
   handleImmobileList: (filter: ValidUrls) => void;
   handleImmobileListFilter: (companny: ValidUrls, immobileType: FilterImmobile, page:number) => void;
+  getImmobileById: (id: string) => void;
 }
 const elmtsPerPage = 24;
 export const useImmobileList = (): ReturnHooks => {
   const [immobileBasicList, setImmobileBasicList] = useState<Array<ImmobileDTO>>([]);
+  const [currentImmobile, setCurrentImmobile] = useState<ImmobileDTO>();
   const [staticList, setStaticList] = useState<Array<ImmobileDTO>>([]);
   const [errGetList, setErrGetList] = useState<string>('');
   const [isLoading, setisLoading] = useState<boolean>(false);
@@ -72,7 +75,24 @@ export const useImmobileList = (): ReturnHooks => {
       });
   },[handleZapImmobileList, handleVivaRealImmobileList])
 
+
+  const getImmobileById = useCallback((id: string) => {
+    setisLoading(true);
+    getImmobileList()
+    .then((response) => {
+      response.json()
+      .then((data: Array<ImmobileDTO>) =>{
+        const tratedLatandLon = validationLatandLon(data);
+        const localImmobile = tratedLatandLon.filter(elt => elt.id === id);
+        setCurrentImmobile(localImmobile[0] || null)
+      });
+    }).catch((err) => {
+      console.error('Failed retrieving information', err);
+    });
+
+  },[])
+
    
 
-  return { immobileBasicList, errGetList, isLoading, totalItens, handleImmobileList, handleImmobileListFilter }
+  return { immobileBasicList, errGetList, isLoading, totalItens, currentImmobile, handleImmobileList, handleImmobileListFilter, getImmobileById }
 }

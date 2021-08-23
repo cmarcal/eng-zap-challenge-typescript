@@ -1,6 +1,6 @@
-import React , { useContext } from 'react'
+import React , { useContext, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { SubTitle, Title } from '../../components/texts';
+import {  Title } from '../../components/texts';
 import { Carousel } from '../../components/carousel';
 import { ImmobileContext } from '../../store/immobile/ImmobileContext';
 import { SliderContainer, DetailsContainer, BodyContainer, CityLabel, ValueContainer, DescriptionsContainer, ListMoreDetails, ItenListMoreDetails, LabelMoreDetails, MoreDetails, TextMoreDetails } from './styles';
@@ -11,16 +11,45 @@ import { colors } from '../../assets/colorsToken';
 import { QuickInfos } from './components/QuickInfos';
 import { PostCreatedAt } from './components/PostCreatedAt';
 import { ValueCard } from './components/valueCard/ValueCard';
-import { ListPayments } from './components/valueCard/styles';
+import { ImmobileDTO } from '../../services/IServices';
+import { useImmobileList } from '../../hooks/useImmobileList';
 
+const initState: ImmobileDTO = {
+  address : {city: '', neighborhood: '',geoLocation: {location: { lat: 0, lon: 0}, precision: ''}},
+  bathrooms: 0,
+  bedrooms: 0,
+  createdAt: '',
+  id: '',
+  images: [''],
+  listingStatus: '',
+  owner: false,
+  parkingSpaces:0,
+  listingType: '',
+  updatedAt: '',
+  usableAreas: 0,
+  pricingInfos: {businessType: '', monthlyCondoFee:'', price:'', rentalTotalPrice: '', yearlyIptu:''}
+
+}
 
 export const ImmobileDetailsTemplate = () => {
   const {colorTextByCompanny} = useGetCompannyColor();
   const router = useRouter()
-  
+  const [localImmobile, setLocalImmobile] = useState<ImmobileDTO>(initState); 
+  const {currentImmobile, getImmobileById} = useImmobileList()
   const {
     immobileContextState
 	} = useContext(ImmobileContext);
+
+  useEffect(() => {
+    if (immobileContextState.id) setLocalImmobile(immobileContextState)
+    if (!immobileContextState.id && localImmobile.id === '') getImmobileById(router.query.id as string)
+  }, [getImmobileById, immobileContextState, immobileContextState.id, localImmobile.id, router.query.id])
+
+  useEffect(() => {
+    if (currentImmobile && currentImmobile?.id === router.query.id as string) {
+      setLocalImmobile(currentImmobile)
+    }
+  }, [currentImmobile, router.query.id])
   
   const contentLinkButton = <><IoArrowBackCircleOutline /> Voltar para lista de imoveis</>;
 
@@ -49,24 +78,26 @@ export const ImmobileDetailsTemplate = () => {
 
   return (
     <DetailsContainer>
-      <SliderContainer>
-        <Carousel images={immobileContextState.images} centerMode  sizeImages={{width: 5, height: 2.4}} centerSlidePercentage={55}/>
-      </SliderContainer>
-      <BodyContainer>
+      {localImmobile && localImmobile.id !== '' && 
+      <>
+        <SliderContainer>
+          <Carousel images={localImmobile.images} centerMode  sizeImages={{width: 5, height: 2.4}} centerSlidePercentage={55}/>
+        </SliderContainer>
+        <BodyContainer>
         <DescriptionsContainer>
           <LinkButton color={colorTextByCompanny(router.query.company as string)} onClick={handleBackPage} content={contentLinkButton}/>
           
-          <Title text={typeAnnouncement(immobileContextState.pricingInfos.businessType)} color={colors.black} />
-          <CityLabel>{immobileContextState.address.city}, {immobileContextState.address.neighborhood}</CityLabel>
+          <Title text={typeAnnouncement(localImmobile.pricingInfos.businessType)} color={colors.black} />
+          <CityLabel>{localImmobile.address.city}, {localImmobile.address.neighborhood}</CityLabel>
 
-          <PostCreatedAt createdAt={immobileContextState.createdAt} />
+          <PostCreatedAt createdAt={localImmobile.createdAt} />
 
           <QuickInfos
             colorIcon={colorTextByCompanny(router.query.company as string)}
-            parkingSpaces={immobileContextState.parkingSpaces}
-            usableAreas={immobileContextState.usableAreas}
-            bedrooms={immobileContextState.bedrooms}
-            bathrooms={immobileContextState.bathrooms} />
+            parkingSpaces={localImmobile.parkingSpaces}
+            usableAreas={localImmobile.usableAreas}
+            bedrooms={localImmobile.bedrooms}
+            bathrooms={localImmobile.bathrooms} />
 
           <MoreDetails>
             <LabelMoreDetails color={colorTextByCompanny(router.query.company as string)}>O que facilita para conseguir este imóvel:</LabelMoreDetails>
@@ -74,8 +105,8 @@ export const ImmobileDetailsTemplate = () => {
               <ItenListMoreDetails><IoCheckmarkCircleOutline /> Ter uma bom score de crédito</ItenListMoreDetails>
               <ItenListMoreDetails><IoCheckmarkCircleOutline /> Renda ativa</ItenListMoreDetails>
               <ItenListMoreDetails><IoCheckmarkCircleOutline /> Bom histórico de pagamento</ItenListMoreDetails>
-             { immobileContextState.pricingInfos.businessType === 'RENTAL' && <ItenListMoreDetails><IoCheckmarkCircleOutline /> Renda mensal de pelo menos {valueImmobile(Number(immobileContextState.pricingInfos.price) * 3)}</ItenListMoreDetails>}
-             { immobileContextState.pricingInfos.businessType === 'SALE' && <ItenListMoreDetails><IoCheckmarkCircleOutline /> Valor de entrada de pelo menos {valueImmobile(Number(immobileContextState.pricingInfos.price) * 0.20)}</ItenListMoreDetails>}
+             { localImmobile.pricingInfos.businessType === 'RENTAL' && <ItenListMoreDetails><IoCheckmarkCircleOutline /> Renda mensal de pelo menos {valueImmobile(Number(localImmobile.pricingInfos.price) * 3)}</ItenListMoreDetails>}
+             { localImmobile.pricingInfos.businessType === 'SALE' && <ItenListMoreDetails><IoCheckmarkCircleOutline /> Valor de entrada de pelo menos {valueImmobile(Number(localImmobile.pricingInfos.price) * 0.20)}</ItenListMoreDetails>}
             </ListMoreDetails>
           </MoreDetails>
 
@@ -102,12 +133,14 @@ Proin mattis ipsum vel massa vehicula, id dapibus turpis dapibus. Aenean quis au
         </DescriptionsContainer>
 
         <ValueContainer>
-          <ValueCard pricingInfos={immobileContextState.pricingInfos} />
+          <ValueCard pricingInfos={localImmobile.pricingInfos} />
 
         </ValueContainer>
 
        
       </BodyContainer>
+      </>
+      }
     </DetailsContainer>
   )
 }
