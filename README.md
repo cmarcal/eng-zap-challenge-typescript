@@ -4,13 +4,13 @@ Desafio para mostrar os imóveis a venda e para alugar das empresas do Grupo OLX
 
 ## Tabela de conteúdo
 
-- [Tecnologias utilizadas](#Tecnologias-utilizadas)
-- [Ferramentas de apoio](#Ferramentas-de-apoio)
-- [Pré-requisistos](#Pré-requisitos)
-- [Rodando a aplicação](#Rodando-a-aplicação)
-- [Rodando os Testes](#Rodando-os-teses)
-- [Deploy](#Deploy)
-- [Autor](#Autor)
+- [Tecnologias utilizadas](#tecnologias-utilizadas)
+- [Ferramentas de apoio](#ferramentas-de-apoio)
+- [Pré-requisistos](#pré-requisitos)
+- [Rodando a aplicação](#rodando-a-aplicação)
+- [Rodando os Testes](#rodando-os-teses)
+- [Deploy](#deploy)
+- [Autor](#autor)
 
 ## Tecnologias utilizadas
 
@@ -22,14 +22,13 @@ As seguintes ferramentas foram usadas na construção do projeto:
 - [Context Api](https://pt-br.reactjs.org/docs/context.html#api)
 - [Syled Component](https://styled-components.com/)
 - [Jest](https://jestjs.io/pt-BR/)
-- [React Testing Libary](https://testing-library.com/docs/react-testing-library/intro/)
+- [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
 - [Axios](https://axios-http.com/docs/intro)
 - [Prettier](https://prettier.io/)
 - [EsLint](https://eslint.org/)
 - [react-responsive-carousel](https://github.com/leandrowd/react-responsive-carousel)
 - [React Icons](https://github.com/react-icons/react-icons)
 - [react-loading-skeleton](https://github.com/dvtng/react-loading-skeleton#readme)
-
 
 ## Ferramentas de apoio
 
@@ -46,7 +45,7 @@ Antes de começar, precisamos ter certeza que vamos ter o [Git](https://git-scm.
 
 ## Rodando a aplicação
 
-Após garantir que temos estes programas, podemos comçar rodar o projeto localmente.
+Após garantir que temos estes programas, podemos começar rodar o projeto localmente.
 
 ```bash
 # Clonar este repositório
@@ -71,7 +70,7 @@ $ yarn dev
 ```
 Após rodar todos estes comandos, a aplicação vai estar pronta localmente.
 
-Abra [http://localhost:3000](http://localhost:3000) em seu navegador, de preferência firefox ou google chorme, para conseguir ver os resutlados.
+Abra [http://localhost:3000](http://localhost:3000) em seu navegador, de preferência firefox ou google chorme, para conseguir ver os resultados.
 
 ## Rodando os testes
 
