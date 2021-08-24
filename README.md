@@ -1,47 +1,103 @@
-# eng-zap-challenge-typescript
+# Desafio OLX
 
-### Linguaguem e frameworks utilizados para contrução do projeto
+Desafio para mostrar os imóveis a venda e para alugar das empresas do Grupo OLX.
 
-- React com Next
-- Context Api para salvar os dados de um imóvel específico
-- Typescript
-- Syled Component - para estilização
-- Jest - motor para teste
-- React Testing Libary - para testes unitário e integração
-- Axios - para fazer integração
-- Prettier - para o lint do código
-- EsLint - para o lint do código
-- react-responsive-carousel - Slider de imagens https://github.com/leandrowd/react-responsive-carousel
-- React Icons - https://github.com/react-icons/react-icons
-- Loading com skeleton  - react-loading-skeleton https://github.com/dvtng/react-loading-skeleton#readme
+## Tabela de conteúdo
 
-### Ferramentas usada para ajudar durante a organização do projeto
+- [Tecnologias utilizadas](#Tecnologias-utilizadas)
+- [Ferramentas de apoio](#Ferramentas-de-apoio)
+- [Pré-requisistos](#Pré-requisitos)
+- [Rodando a aplicação](#Rodando-a-aplicação)
+- [Rodando os Testes](#Rodando-os-teses)
+- [Deploy](#Deploy)
+- [Autor](#Autor)
 
-- Miro to create [System design and Design system](https://miro.com/app/board/o9J_l2YbSps=/)
-- Notion para criar o board de prioridades
+## Tecnologias utilizadas
 
-### Iniciando o projeto
+As seguintes ferramentas foram usadas na construção do projeto: 
 
-Primeiro precisamos acessar a pasta `app/` via terminal. De início certificaremos se estamos dentro da pasta do projeto, tendo a garantia que estamos na pasta `/eng-zap-challenge-typescript` ,utilizando o comando `cd /app`. Uma vez dentro da pasta `app/` precisaremos rodar os seguintes comandos em sequência.
+- [Typescript](https://www.typescriptlang.org/)
+- [React](https://pt-br.reactjs.org/)
+- [Nextjs](https://nextjs.org/)
+- [Context Api](https://pt-br.reactjs.org/docs/context.html#api)
+- [Syled Component](https://styled-components.com/)
+- [Jest](https://jestjs.io/pt-BR/)
+- [React Testing Libary](https://testing-library.com/docs/react-testing-library/intro/)
+- [Axios](https://axios-http.com/docs/intro)
+- [Prettier](https://prettier.io/)
+- [EsLint](https://eslint.org/)
+- [react-responsive-carousel](https://github.com/leandrowd/react-responsive-carousel)
+- [React Icons](https://github.com/react-icons/react-icons)
+- [react-loading-skeleton](https://github.com/dvtng/react-loading-skeleton#readme)
+
+
+## Ferramentas de apoio
+
+Para ajudar na organizações de construção do projeto foram utlizados as ferramentas:
+
+- [Miro](https://miro.com/)
+- [Notion](https://www.notion.so/)
+
+Para mostrar um pouco melhor como foi feita a utilização do miro, segue o link de como eu o utilizei, [desafio OLX](https://miro.com/app/board/o9J_l2YbSps=/)
+
+## Pré-requisistos
+
+Antes de começar, precisamos ter certeza que vamos ter o [Git](https://git-scm.com), [Node.js](https://nodejs.org/en/), [NPM](https://www.npmjs.com/) ou [Yarn](https://yarnpkg.com/) instalados em sua máquina.
+
+## Rodando a aplicação
+
+Após garantir que temos estes programas, podemos comçar rodar o projeto localmente.
 
 ```bash
-npm install
-# or
-yarn
-```
+# Clonar este repositório
+$ git clone https://github.com/cmarcal/eng-zap-challenge-typescript.git
 
-```bash
-npm run dev
-# or
-yarn dev
+# Acesse a pasta do projeto via terminal/cmd
+$ cd eng-zap-challenge-typescript
+
+# Vá para pasta app
+$ cd app
+
+# Instale as dependencias do projeto
+$ npm install
+# ou 
+$ yarn
+
+# Execute a aplicação
+$ npm dev
+# ou 
+$ yarn dev
+
 ```
+Após rodar todos estes comandos, a aplicação vai estar pronta localmente.
 
 Abra [http://localhost:3000](http://localhost:3000) em seu navegador, de preferência firefox ou google chorme, para conseguir ver os resutlados.
 
-### Rodando os testes
+## Rodando os testes
 
-Pra conseguirmos rodar os testes, vamos precisar acessar a pasta `app/`, uma vez dentro da pasta `app/`, rodaremos os seguintes comandos.
+Pra conseguirmos executar os testes, vamos executar os seguintes comandos:
 
 ```bash
-yarn run test
+# Acesse a pasta do projeto via terminal/cmd
+$ cd eng-zap-challenge-typescript
+
+# Vá para pasta app
+$ cd app
+
+# Execute os teste
+$npm run test
+# ou
+$ yarn run test
 ```
+
+## Deploy
+
+A aplicação esta deployada na [Vercel](https://vercel.com/) e a a atualização este apontada para todas as mudanças feita na branch `Main`
+## Autor
+
+<br />
+<img style="border-radius: 50%" width="100" src="https://avatars.githubusercontent.com/u/52171893?s=400&u=b19879f8f26e7fc14ba8ca3975b00f77c7812100&v=4"/>
+
+<a href="https://github.com/cmarcal">Roberto Marçal 👾</a>
+
+Feito com muito 💜 e muita dedicação
