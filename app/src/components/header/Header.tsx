@@ -6,7 +6,6 @@ import { ReactElement } from 'react'
 import { useGetCompannyColor } from '../../hooks/useGetCompannyColor'
 
 type NavigationItem = {label: string, path: string;}
-type Navigation = Array<NavigationItem>
 
 export const Header = (): ReactElement => {
   const { query, push } = useRouter()
@@ -25,31 +24,13 @@ export const Header = (): ReactElement => {
     }
   }
 
-  const navigation = (): Navigation => {
-    const itens: Navigation = [];
-
-    switch (query.company) {
-      case 'zap':
-        itens.push({label: 'Imóveis Viva Real', path: '/vivareal'});
-        return itens;
-      case 'vivareal':
-        itens.push({label: 'Imóveis Zap', path: '/zap'});
-        return itens;
-      default:
-        return itens;
-    }
-
-  }
- 
   return (
     <HeaderContainer isHome={isHome} data-testid='HeaderContainer'>
       {getLogo()}
       {!isHome && (
         <NavigationContainer>
           <NavigationItens onClick={()=> push('/')} colorText={colorTextByCompanny(query.company as string)}>Home</NavigationItens>
-        {navigation().map((el, idx) => (
-          <NavigationItens  onClick={()=> push(el.path)} colorText={colorTextByCompanny(query.company as string)} key={idx}>{el.label}</NavigationItens>
-        ))}
+
         </NavigationContainer>
       )}
     </HeaderContainer>

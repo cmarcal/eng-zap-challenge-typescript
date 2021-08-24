@@ -12,7 +12,7 @@ export const CompanyTemplate = ({path}: Props) => {
   const [activeFilter, setActiveFilter] = useState<FilterImmobile>('ALL')
   const [activePage, setActivePage] = useState<number>(1)
 
-  const {handleImmobileList, errGetList, immobileBasicList, isLoading , totalItens, handleImmobileListFilter} = useImmobileList()
+  const {handleImmobileList,  immobileBasicList, isLoading , totalItens, handleImmobileListFilter} = useImmobileList()
 
   useEffect(() => {
     path && handleImmobileList(path)

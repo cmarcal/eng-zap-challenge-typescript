@@ -7,7 +7,6 @@ export type ValidUrls = 'zap' | 'vivareal'
 export type FilterImmobile = 'RENTAL' | 'SALE' | 'ALL'
 interface ReturnHooks {
   immobileBasicList: ImmobileDTO[]; 
-  errGetList: string; 
   isLoading: boolean;
   totalItens: number;
   currentImmobile: ImmobileDTO | undefined;
@@ -20,7 +19,6 @@ export const useImmobileList = (): ReturnHooks => {
   const [immobileBasicList, setImmobileBasicList] = useState<Array<ImmobileDTO>>([]);
   const [currentImmobile, setCurrentImmobile] = useState<ImmobileDTO>();
   const [staticList, setStaticList] = useState<Array<ImmobileDTO>>([]);
-  const [errGetList, setErrGetList] = useState<string>('');
   const [isLoading, setisLoading] = useState<boolean>(false);
   const [totalItens, setTotalItens] = useState<number>(0);
 
@@ -28,10 +26,11 @@ export const useImmobileList = (): ReturnHooks => {
   const handleImmobileListFilter = useCallback((companny: ValidUrls, immobileType: FilterImmobile, page: number) => {
     const shallowList = [...staticList]
     const skip = (page - 1) * elmtsPerPage;
+    const take =  page * elmtsPerPage
 
     if (immobileType === 'ALL') {
-      const listWithPagination = shallowList.slice(skip , page *  elmtsPerPage);
-      setTotalItens(staticList.length);
+      const listWithPagination = shallowList.slice(skip , take);
+      setTotalItens(shallowList.length);
 
       return setImmobileBasicList(listWithPagination);
     }
@@ -39,29 +38,30 @@ export const useImmobileList = (): ReturnHooks => {
     const filterList = shallowList.filter(el => el.pricingInfos.businessType === immobileType);
     setTotalItens(filterList.length);
 
-    setImmobileBasicList(filterList.slice(skip , page *  elmtsPerPage));
+    setImmobileBasicList(filterList.slice(skip , take));
   },[staticList])
+
+  const factoryCreateLists = (list: Array<ImmobileDTO>) => {
+    setStaticList(list);
+    setTotalItens(list.length);
+    setImmobileBasicList(list.slice(0, elmtsPerPage));
+  }
 
   const handleZapImmobileList = useCallback((data: Array<ImmobileDTO>):void => {
     setisLoading(false);
     const zapList = rulesZap(data);
-    setStaticList(zapList);
-    setTotalItens(zapList.length);
 
-    setImmobileBasicList(zapList.slice(0, elmtsPerPage));
-
+    factoryCreateLists(zapList)
   },[])
 
   const handleVivaRealImmobileList = useCallback((data: Array<ImmobileDTO>):void => {
     setisLoading(false);
     const vivarealList = rulesVivaReal(data);
-    setStaticList(vivarealList);
-    setTotalItens(vivarealList.length);
-    setImmobileBasicList(vivarealList.slice(0, elmtsPerPage));
+
+    factoryCreateLists(vivarealList)
   },[])
 
   const handleImmobileList = useCallback((filter: ValidUrls) => {
-    setErrGetList('');
     setisLoading(true);
 
     getImmobileList()
@@ -92,5 +92,5 @@ export const useImmobileList = (): ReturnHooks => {
 
    
 
-  return { immobileBasicList, errGetList, isLoading, totalItens, currentImmobile, handleImmobileList, handleImmobileListFilter, getImmobileById }
+  return { immobileBasicList, isLoading, totalItens, currentImmobile, handleImmobileList, handleImmobileListFilter, getImmobileById }
 }
