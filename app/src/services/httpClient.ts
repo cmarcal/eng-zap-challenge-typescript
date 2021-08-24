@@ -1,17 +1,14 @@
 import axios from 'axios';
 
-export const httpClient = axios.create({
-	headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'Access-Control-Allow-Origin': '*', 'Accept': '*/*', 'Access-Control-Allow-Credentials': true },
-	baseURL: process.env.NEXT_PUBLIC_API,
-	timeout: 10000,
-	withCredentials: true
+export const Api = axios.create({
+  headers: {
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*',
+    Accept: '*/*',
+  },
+  baseURL: process.env.NEXT_PUBLIC_API,
 });
 
-
-
-httpClient.interceptors.response.use(
-	(response) => response,
-	(error) => Promise.reject(error)
-);
-
-export default httpClient;
+Api.interceptors.request.use((config) => {
+  return config;
+});

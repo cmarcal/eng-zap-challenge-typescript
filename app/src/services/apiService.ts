@@ -1,5 +1,5 @@
 import { AxiosPromise } from 'axios';
 
-import httpClient from './httpClient';
+import {Api} from './httpClient';
 
-export const get = (url: string): AxiosPromise => httpClient.get(url);
+export const get = (url: string): AxiosPromise => Api.get(url);
