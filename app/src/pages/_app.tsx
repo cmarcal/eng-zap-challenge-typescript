@@ -17,7 +17,8 @@ function MyApp({ Component, pageProps }: AppProps) {
 			<Head>
 				<title>OLX Brasil</title>
 				<meta name='description' content='Aluguel e compras de imóveis | OLX Brasil | Zap | Viva Real' />
-				<meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+				<meta httpEquiv="Content-Security-Policy" content="block-all-mixed-content"></meta>
+				{/* <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests" /> */}
 			</Head>
 			<Body>
 				<Header />
