@@ -11,7 +11,7 @@ interface ReturnHooks {
   totalItens: number;
   currentImmobile: ImmobileDTO | undefined;
   handleImmobileList: (filter: ValidUrls) => void;
-  handleImmobileListFilter: (companny: ValidUrls, immobileType: FilterImmobile, page:number) => void;
+  handleImmobileListFilter: (immobileType: FilterImmobile, page:number) => void;
   getImmobileById: (id: string) => void;
 }
 const elmtsPerPage = 20;
@@ -23,7 +23,7 @@ export const useImmobileList = (): ReturnHooks => {
   const [totalItens, setTotalItens] = useState<number>(0);
 
 
-  const handleImmobileListFilter = useCallback((companny: ValidUrls, immobileType: FilterImmobile, page: number) => {
+  const handleImmobileListFilter = useCallback((immobileType: FilterImmobile, page: number) => {
     const shallowList = [...staticList]
     const skip = (page - 1) * elmtsPerPage;
     const take =  page * elmtsPerPage

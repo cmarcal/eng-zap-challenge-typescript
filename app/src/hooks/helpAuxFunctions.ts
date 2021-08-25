@@ -1,11 +1,15 @@
 import { ImmobileDTO } from 'src/services/IServices';
 
+const rentalZapValue = Number(3500)
+const saleZapValue = Number(600000)
+const rentalVivaRealValue = Number(4000)
+const saleVivaRealValue = Number(700000)
+
 export const validationLatandLon = (data: Array<ImmobileDTO>): Array<ImmobileDTO> => {
   return data.filter(elt => elt.address.geoLocation.location.lat !== 0 && elt.address.geoLocation.location.lon !== 0)
 }
 
-
-const verifyBoundBox = (lat: number, lon: number) => {
+export const verifyBoundBox = (lat: number, lon: number) => {
   const verifyLatBoundingBox = (): boolean => {
     const minlat = -23.568704;
     const maxlat = -23.546686;
@@ -22,10 +26,9 @@ const verifyBoundBox = (lat: number, lon: number) => {
 
 }
 
-const zapValidBySquareMeters = (squareMeters: number, valueImmobile: number, isBoundBox: boolean): boolean => {
+export const zapValidBySquareMeters = (squareMeters: number, valueImmobile: number, isBoundBox: boolean): boolean => {
   if(squareMeters === 0) return false;
-  const valueZap = Number(process.env.NEXT_PUBLIC_RENTAL_ZAP)
-  const conditionalValueZap = isBoundBox ? (valueZap - (valueZap * 0.1)) : valueZap;
+  const conditionalValueZap = isBoundBox ? (rentalZapValue - (rentalZapValue * 0.1)) : rentalZapValue;
 
   const valueBySquareMeters = valueImmobile / squareMeters;
 
@@ -33,8 +36,6 @@ const zapValidBySquareMeters = (squareMeters: number, valueImmobile: number, isB
 }
 
 export const rulesZap = (data: Array<ImmobileDTO>): Array<ImmobileDTO> => {
-  const rentalPrice = Number(process.env.NEXT_PUBLIC_RENTAL_ZAP);
-  const salePrice = Number(process.env.NEXT_PUBLIC_SALE_ZAP);
 
   const tratedList = data.reduce((acc: Array<ImmobileDTO>, currentValue: ImmobileDTO) => {
     const {usableAreas, pricingInfos: {businessType, price}, address: {geoLocation: {location: {lon, lat}}} } = currentValue;
@@ -43,11 +44,11 @@ export const rulesZap = (data: Array<ImmobileDTO>): Array<ImmobileDTO> => {
     if(businessType === 'SALE') {
       const isBoundBox = verifyBoundBox(lat, lon);
       const validSquareMeter =  zapValidBySquareMeters(usableAreas, priceNumber, isBoundBox);
-      if(priceNumber >= salePrice && validSquareMeter)
+      if(priceNumber >= saleZapValue && validSquareMeter)
         acc.push(currentValue)
     }
     if(businessType === 'RENTAL') {
-      if(priceNumber >= rentalPrice)
+      if(priceNumber >= rentalZapValue)
         acc.push(currentValue)
     }
     return acc
@@ -56,34 +57,29 @@ export const rulesZap = (data: Array<ImmobileDTO>): Array<ImmobileDTO> => {
   return tratedList;
 }
 
-const vivaRealValidByMonthlyCondoFee = (monthlyCondoFee: string, isBoundBox: boolean): boolean => {
+export const vivaRealValidByMonthlyCondoFee = (monthlyCondoFee: string, isBoundBox: boolean): boolean => {
   const validMonthlyCondoFee = Number(monthlyCondoFee)
   if (isNaN(validMonthlyCondoFee)) return false;
-  const valueVivaReal = Number(process.env.NEXT_PUBLIC_RENTAL_VIVAREAL)
   const percentvalue = isBoundBox ? 0.5: 0.3;
 
-
-  return validMonthlyCondoFee <= valueVivaReal * percentvalue;
+  return validMonthlyCondoFee <= rentalVivaRealValue * percentvalue;
 
 }
 
 export const rulesVivaReal = (data: Array<ImmobileDTO>): Array<ImmobileDTO> => { 
-  const rentalPrice = Number(process.env.NEXT_PUBLIC_RENTAL_VIVAREAL);
-  const salePrice = Number(process.env.NEXT_PUBLIC_SALE_VIVAREAL);
-
   const tratedList = data.reduce((acc: Array<ImmobileDTO>, currentValue: ImmobileDTO) => {
     const { pricingInfos: {businessType, price, monthlyCondoFee}, address: {geoLocation: {location: {lon, lat}}} } = currentValue;
     const priceNumber = Number(price)
-
     
     if(businessType === 'SALE') {
-      if(priceNumber >= salePrice)
+      if(priceNumber >= saleVivaRealValue)
         acc.push(currentValue)
     }
+    
     if(businessType === 'RENTAL') {
       const isBoundBox = verifyBoundBox(lat, lon);
       const validMonthlyCondoFee = vivaRealValidByMonthlyCondoFee(monthlyCondoFee, isBoundBox)
-      if (priceNumber >= rentalPrice && validMonthlyCondoFee)
+      if (priceNumber >= rentalVivaRealValue && validMonthlyCondoFee)
         acc.push(currentValue)
     }
     return acc

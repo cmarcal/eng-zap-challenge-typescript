@@ -23,14 +23,13 @@ export const CompanyTemplate = ({path}: Props) => {
   const handleFilter = (immobileType: FilterImmobile) => {
     setActiveFilter(immobileType);
     setActivePage(1);
-    handleImmobileListFilter(path as ValidUrls, immobileType, 1)
+    handleImmobileListFilter(immobileType, 1)
   }
 
   const handleChangePage = (page: number) => {
     setActivePage(page)
-    handleImmobileListFilter(path as ValidUrls, activeFilter, page)
+    handleImmobileListFilter( activeFilter, page)
   }
-
   return (
     <>
     <FilterContainer>
