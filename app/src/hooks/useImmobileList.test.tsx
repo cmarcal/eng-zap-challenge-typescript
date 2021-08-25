@@ -1,7 +1,7 @@
 import { renderHook } from '@testing-library/react-hooks';
 import { act } from 'react-dom/test-utils';
-import { useImmobileList } from '../useImmobileList';
-import * as ImmobileListRequest from '../../services/get';
+import { useImmobileList } from './useImmobileList';
+import * as ImmobileListRequest from '../services/get';
 import { mockImmobileList, getImmobileListlRequest } from './mock';
 
 const getMockImmobileList = () =>
