@@ -34,6 +34,7 @@ export const FilterContainer = styled.div `
   background-image: url('https://www.techrepublic.com/a/hub/i/r/2020/12/19/b7c2c7df-3634-4bee-ba70-a5c157cdc3b6/resize/1200x900/301059bf8d1b7a592ffaae45784f2466/zoom-vanit-janthra.jpg');
   background-repeat: no-repeat;
   opacity: 0.7;
+ 
 `
 
 export const BoxContainer = styled.div`
@@ -43,6 +44,9 @@ export const BoxContainer = styled.div`
   align-items: center;
   flex-direction: column;
   text-transform: uppercase;
+  @media (max-width: 768px) {
+    margin-top: -13%
+  }
 `
 
 export const Image = styled.img`
