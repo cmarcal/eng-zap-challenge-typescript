@@ -8,7 +8,7 @@ Desafio para mostrar os imóveis a venda e para alugar das empresas do Grupo OLX
 - [Ferramentas de apoio](#ferramentas-de-apoio)
 - [Pré-requisistos](#pré-requisitos)
 - [Rodando a aplicação](#rodando-a-aplicação)
-- [Rodando os Testes](#rodando-os-teses)
+- [Rodando os Testes](#rodando-os-testes)
 - [Deploy](#deploy)
 - [Autor](#autor)
 
