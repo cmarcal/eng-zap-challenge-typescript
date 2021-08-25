@@ -7,7 +7,7 @@ import { Title } from '../texts';
 import router from 'next/router';
 import { useInfoCard } from './useInfoCard';
 import { ImmobileContext } from '../../store/immobile/ImmobileContext';
-interface Props {
+export interface Props {
   info: ImmobileDTO;
   companny: string;
 }
@@ -16,7 +16,6 @@ export const InfoCard = ({info, companny}: Props): ReactElement => {
   const {id, bathrooms, bedrooms, images, parkingSpaces, usableAreas, pricingInfos} = info;
   const { colorTextByCompanny, typeAnnouncement, valueImmobile } = useInfoCard();
   const { immobileContextDispatch } = useContext(ImmobileContext)
-
   const goToPage = `/${companny}/${id}`;
   const valueToFormat = pricingInfos.businessType === 'SALE' ? parseFloat(pricingInfos.price) : parseFloat(pricingInfos.rentalTotalPrice as string);
   
@@ -26,7 +25,7 @@ export const InfoCard = ({info, companny}: Props): ReactElement => {
   }
 
   return (
-    <InforCardContainer >
+    <InforCardContainer data-testid="InfoCardContainer">
       <Carousel images={images} sizeImages={{width: 7, height: 5}}/>
       <BodyContainer>
         <TileContainer>
@@ -34,10 +33,10 @@ export const InfoCard = ({info, companny}: Props): ReactElement => {
           <Price colorText={colorTextByCompanny(companny)}>{valueImmobile(valueToFormat)}</Price>
         </TileContainer>
         <ListInfoContainer>
-          <ItemList isBold > {usableAreas} m²</ItemList>
-          {bathrooms > 0 && <ItemList ><FaShower /> {bathrooms}</ItemList>}
-          {bedrooms > 0 && <ItemList><FaBed /> {bedrooms}</ItemList>}
-          {parkingSpaces > 0 && <ItemList><FaCar /> {parkingSpaces}</ItemList>}
+          <ItemList isBold data-testid='usableAreas'> {usableAreas} m²</ItemList>
+          {bathrooms > 0 && <ItemList data-testid='bathrooms'><FaShower /> {bathrooms}</ItemList>}
+          {bedrooms > 0 && <ItemList data-testid='bedrooms'><FaBed /> {bedrooms}</ItemList>}
+          {parkingSpaces > 0 && <ItemList data-testid='parkingSpaces'><FaCar /> {parkingSpaces}</ItemList>}
         </ListInfoContainer>
           
           <LinkButton onClick={handleClickCard} colorText={colorTextByCompanny(companny)}>Mais informações</LinkButton>

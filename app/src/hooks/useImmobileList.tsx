@@ -42,22 +42,19 @@ export const useImmobileList = (): ReturnHooks => {
   },[staticList])
 
   const factoryCreateLists = (list: Array<ImmobileDTO>) => {
+    setisLoading(false);
     setStaticList(list);
     setTotalItens(list.length);
     setImmobileBasicList(list.slice(0, elmtsPerPage));
   }
 
   const handleZapImmobileList = useCallback((data: Array<ImmobileDTO>):void => {
-    setisLoading(false);
     const zapList = rulesZap(data);
-
     factoryCreateLists(zapList)
   },[])
 
   const handleVivaRealImmobileList = useCallback((data: Array<ImmobileDTO>):void => {
-    setisLoading(false);
     const vivarealList = rulesVivaReal(data);
-
     factoryCreateLists(vivarealList)
   },[])
 

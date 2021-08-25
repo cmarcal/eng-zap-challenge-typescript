@@ -1,4 +1,4 @@
-import { colors } from 'src/assets/colorsToken';
+import { colors } from '../../assets/colorsToken';
 import styled from 'styled-components';
 
 export const InforCardContainer = styled.div`

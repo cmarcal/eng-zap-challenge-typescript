@@ -8,7 +8,7 @@ type SizeImage = {
   width: number;
   height: number;
 }
-interface Props {
+export interface Props {
   images: Array<string>
   sizeImages: SizeImage;
   centerMode?: boolean;
@@ -17,7 +17,7 @@ interface Props {
 
 export const Carousel = ({images, sizeImages, centerMode, centerSlidePercentage}: Props) => {
   return (
-    <CarouselContainer>
+    <CarouselContainer data-testid='CarouselContainer'>
       <CarouselLib infiniteLoop useKeyboardArrows showThumbs={false} showStatus={false} centerMode={centerMode} centerSlidePercentage={centerSlidePercentage}>
           {images.map((img, idx) => (
             <Image 
