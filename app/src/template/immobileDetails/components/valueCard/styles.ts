@@ -3,11 +3,12 @@ import styled from 'styled-components';
 
 export const CardContainer = styled.div `
   border-radius: 8px;
-  border:1px solid ${colors.gray};
-  padding:16px;
-  width: 230px;
+  border: 1px solid ${colors.gray};
+  padding: 24px;
+  width: 300px;
   position: sticky;
   top: 30px;
+  font-size: 1.2rem;
   @media (max-width: 768px) {
     position: relative;
     top: 0;
@@ -16,6 +17,8 @@ export const CardContainer = styled.div `
     border-top:1px solid ${colors.gray};
     border-bottom:1px solid ${colors.gray};
     border-radius: 0;
+    padding: 16px;  
+    font-size: 1.3rem;
   }
 `
 export const RentalContainer = styled.div`

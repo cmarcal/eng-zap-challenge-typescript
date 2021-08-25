@@ -4,6 +4,11 @@ export const QuickInfosContainer = styled.ul `
   padding-left:0;
   display: flex;
   gap: 24px;
+  font-size: 1.5rem;
+  @media (max-width: 768px) {
+    font-size: 1.3rem;
+
+  }
 `
 export const QuickItens = styled.li `
   list-style-type: none;

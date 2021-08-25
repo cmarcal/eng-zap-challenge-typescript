@@ -20,7 +20,7 @@ export const Buttons = styled.button<{color: string, isActive: boolean;}>`
   padding: 10px 24px; 
   cursor: pointer; 
   float: left;
-  
+  text-transform: uppercase;
   &::after {
     content: "";
     clear: both;

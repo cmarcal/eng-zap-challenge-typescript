@@ -30,15 +30,20 @@ const initState: ImmobileDTO = {
   pricingInfos: {businessType: '', monthlyCondoFee:'', price:'', rentalTotalPrice: '', yearlyIptu:''}
 
 }
-
+const MAX_SCREEN_MOBILE = 768;
 export const ImmobileDetailsTemplate = () => {
   const {colorTextByCompanny} = useGetCompannyColor();
   const router = useRouter()
   const [localImmobile, setLocalImmobile] = useState<ImmobileDTO>(initState); 
-  const {currentImmobile, getImmobileById} = useImmobileList()
+  const {currentImmobile, getImmobileById} = useImmobileList();
+  const [isMobile, setIsMobile] = useState<boolean>(false)
   const {
     immobileContextState
 	} = useContext(ImmobileContext);
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth <= MAX_SCREEN_MOBILE)
+  },[])
 
   useEffect(() => {
     if (immobileContextState.id) setLocalImmobile(immobileContextState)
@@ -46,12 +51,13 @@ export const ImmobileDetailsTemplate = () => {
   }, [getImmobileById, immobileContextState, immobileContextState.id, localImmobile.id, router.query.id])
 
   useEffect(() => {
+
     if (currentImmobile && currentImmobile?.id === router.query.id as string) {
       setLocalImmobile(currentImmobile)
     }
   }, [currentImmobile, router.query.id])
   
-  const contentLinkButton = <><IoArrowBackCircleOutline /> Voltar para lista de imoveis</>;
+  const contentLinkButton = <><IoArrowBackCircleOutline /> Voltar para lista de imóveis</>;
 
   const typeAnnouncement = (businessType: string): string => {
     switch (businessType) {
@@ -81,13 +87,13 @@ export const ImmobileDetailsTemplate = () => {
       {localImmobile && localImmobile.id !== '' && 
       <>
         <SliderContainer>
-          <Carousel images={localImmobile.images} centerMode  sizeImages={{width: 5, height: 2.4}} centerSlidePercentage={55}/>
+          <Carousel images={localImmobile.images} centerMode={!isMobile} sizeImages={{width: 5, height: isMobile ? 5 :2.4}} centerSlidePercentage={55}/>
         </SliderContainer>
         <BodyContainer>
         <DescriptionsContainer>
           <LinkButton color={colorTextByCompanny(router.query.company as string)} onClick={handleBackPage} content={contentLinkButton}/>
           
-          <Title text={typeAnnouncement(localImmobile.pricingInfos.businessType)} color={colors.black} />
+          <Title size='2.5rem' text={typeAnnouncement(localImmobile.pricingInfos.businessType)} color={colors.black} />
           <CityLabel>{localImmobile.address.city}, {localImmobile.address.neighborhood}</CityLabel>
 
           <PostCreatedAt createdAt={localImmobile.createdAt} />
@@ -134,10 +140,8 @@ Proin mattis ipsum vel massa vehicula, id dapibus turpis dapibus. Aenean quis au
 
         <ValueContainer>
           <ValueCard pricingInfos={localImmobile.pricingInfos} />
-
         </ValueContainer>
 
-       
       </BodyContainer>
       </>
       }

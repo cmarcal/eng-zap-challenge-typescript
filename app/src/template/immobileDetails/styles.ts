@@ -5,8 +5,14 @@ export const DetailsContainer = styled.div `
   height: 100%;
 `
 export const SliderContainer = styled.div `
-  height: 35%;
+  height: 55%;
   overflow: hidden;
+  @media (max-width: 768px) {
+    height: 46%;
+  }
+  @media (min-width: 1540px) {
+    height: 43%;
+  }
   &  div {
     height: 100% ;
   }
@@ -35,12 +41,16 @@ export const CityLabel = styled.span `
   align-items: center;
   gap:4px;
   margin-right:6px;
+  font-size:1.3rem;
 `
 
-export const DescriptionsContainer = styled.div ``
+export const DescriptionsContainer = styled.div `
+`
 export const ValueContainer = styled.div ``
 
-export const MoreDetails = styled.div``;
+export const MoreDetails = styled.div`
+  font-size: 1.3rem;
+`;
 export const LabelMoreDetails = styled.label<{color: string}>`
   font-weight:700;
   color: ${({color}) => color};
