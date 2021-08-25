@@ -27,7 +27,7 @@ export const InfoCard = ({info, companny}: Props): ReactElement => {
   return (
     <InforCardContainer data-testid="InfoCardContainer">
       <Carousel images={images} sizeImages={{width: 7, height: 5}}/>
-      <BodyContainer>
+      <BodyContainer onClick={handleClickCard}>
         <TileContainer>
           <Title text={typeAnnouncement(pricingInfos.businessType)} size='1.3em'/> 
           <Price colorText={colorTextByCompanny(companny)}>{valueImmobile(valueToFormat)}</Price>

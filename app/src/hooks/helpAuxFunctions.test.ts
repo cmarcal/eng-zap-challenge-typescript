@@ -29,7 +29,7 @@ describe('zapValidBySquareMeters test', ()=> {
     expect(zapValidBySquareMeters(mockElement.usableAreas, Number(mockElement.pricingInfos.price), true)).toBeTruthy();
   })
   it('Should return immobile is invalid', ()=> {
-    expect(zapValidBySquareMeters(0, Number(invalidImmobiles[0].pricingInfos.price), true)).toBeTruthy();
+    expect(zapValidBySquareMeters(0, Number(invalidImmobiles[0].pricingInfos.price), true)).toBeFalsy();
   })
 })
 
