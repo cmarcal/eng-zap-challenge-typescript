@@ -63,7 +63,7 @@ $ npm install
 $ yarn
 
 # Execute a aplicação
-$ npm dev
+$ npm run dev
 # ou 
 $ yarn dev
 
